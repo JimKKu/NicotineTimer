@@ -1,20 +1,19 @@
 <template>
-  <div class="container">
-    <div class="timer">
-      <h4>距离 2025 年 6 月 2 日 15:00 已过去</h4>
-      <span class="time-text">
-        {{ timePassed.days }} 天
-        {{ timePassed.hours }} 小时
-        {{ timePassed.minutes }} 分钟
-        {{ timePassed.seconds }} 秒
-        {{ timePassed.milliseconds }} 毫秒
-      </span>
-    </div>
-  </div>
+  <WelcomeItem>
+    <template #icon>
+      <NoSmoke />
+    </template>
+    <template #heading>{{getStr(timePassed)}}</template>
+    <a href="https://www.chinatca.cn/" target="_blank" rel="noopener">Smoke</a>
+     clouds the mind. Clarity begins when you quit.<br/>
+    烟雾遮蔽心智，清醒始于戒烟。
+  </WelcomeItem>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
+import WelcomeItem from './components/WelcomeItem.vue'
+import NoSmoke from './components/icons/IconNoSmoke.vue'
 
 interface TimePassed {
   days: number
@@ -68,42 +67,13 @@ onMounted(() => {
 onUnmounted(() => {
   clearInterval(timer)
 })
+
+function getStr(timePassed:TimePassed):string  {
+  return timePassed.days + '天' +
+  timePassed.hours  + ' 小时' +
+  timePassed.minutes  + ' 分钟' +
+  timePassed.seconds  + ' 秒' +
+  timePassed.milliseconds  + ' 毫秒'
+}
 </script>
 
-<style scoped>
-.container {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  top: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-
-.timer {
-  text-align: center;
-  font-size: 1.5rem;
-  color: #783CF9;
-  padding: 1.5rem;
-  border: 2px solid #783CF9;
-  border-radius: 1rem;
-  background-color: #783CF9;
-  box-shadow: 0 0 10px rgba(16, 185, 129, 0.2);
-  min-width: 400px;
-}
-
-.timer :hover {
-  color: #fff;
-}
-
-.time-text {
-  font-weight: bold;
-  font-size: 1.75rem;
-  letter-spacing: 1px;
-  font-variant-numeric: tabular-nums; /* 保持数字宽度一致 */
-}
-</style>
