@@ -1,19 +1,33 @@
 <template>
-  <WelcomeItem>
-    <template #icon>
-      <NoSmoke />
-    </template>
-    <template #heading>{{getStr(timePassed)}}</template>
-    <a href="https://www.chinatca.cn/" target="_blank" rel="noopener">Smoke</a>
-     clouds the mind. Clarity begins when you quit.<br/>
-    烟雾遮蔽心智，清醒始于戒烟。
-  </WelcomeItem>
+  <div class="container">
+    <WelcomeItem>
+      <template #icon>
+        <NoSmoke />
+      </template>
+      <template #heading>
+        <span class="days">{{ timePassed.days }}</span><span class="units">天</span>
+        <span class="days">{{ timePassed.hours }}</span><span class="units">小时</span>
+        <span class="days">{{ timePassed.minutes }}</span><span class="units">分钟</span>
+        <span class="days">{{ timePassed.seconds }}</span><span class="units">秒</span>
+        <span class="days">{{ timePassed.milliseconds }}</span><span class="units">毫秒</span>
+      </template>
+      已经克服了<span class="times">{{result}}</span>次吸烟的欲望，再多坚持一下吧！
+    </WelcomeItem>
+  </div>
+
+  <div class="floot">
+    {{result%2 === 0 ? '烟雾迷人心智，让人意识不清。' : '吸烟有害健康！尽早戒烟有益健康！'}}
+  </div>
+
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import WelcomeItem from './components/WelcomeItem.vue'
 import NoSmoke from './components/icons/IconNoSmoke.vue'
+import {getData} from '@/api/api'
+
+
 
 interface TimePassed {
   days: number
@@ -75,5 +89,53 @@ function getStr(timePassed:TimePassed):string  {
   timePassed.seconds  + ' 秒' +
   timePassed.milliseconds  + ' 毫秒'
 }
+
+// 次数
+const result = ref<any>(null)
+
+onMounted(async () => {
+  try {
+    result.value = await getData()
+  } catch (err) {
+    console.error(err)
+  }
+})
+
+setInterval(async () => {
+  const res = await fetch('/api/get')
+  result.value = await res.json()
+}, 5000)
+
+// 输出一句话
+onMounted(() => {
+  console.log('尽早戒烟有益身体健康！！！')
+})
 </script>
 
+<style scoped >
+.times {
+  font-size: 24px;
+  color: #00bd7e;
+  font-weight: bold;
+  padding: 8px;
+}
+.floot {
+  position: absolute;
+  left: 0;
+  bottom: 12px;
+  width: 100%;
+  height: 20px;
+  color: #868686;
+  text-align: center;
+}
+.days {
+  position: relative;
+  font-size: 24px;
+  padding: 5px;
+  color: #00bd7e;
+}
+.units {
+  font-size: 12px;
+  font-weight: lighter;
+}
+</style>
