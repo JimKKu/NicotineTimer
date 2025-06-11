@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: 'iTimer-Server'
+  profiles:
+    active: 'db'
+server:
+  port: 8080
+  servlet:
+    context-path: /itimer
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.jim.itimerserver.entity
