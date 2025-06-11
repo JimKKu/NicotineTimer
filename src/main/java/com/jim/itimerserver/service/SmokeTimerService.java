@@ -4,4 +4,5 @@ public interface SmokeTimerService {
 
     String mark();
 
+    String countAll();
 }

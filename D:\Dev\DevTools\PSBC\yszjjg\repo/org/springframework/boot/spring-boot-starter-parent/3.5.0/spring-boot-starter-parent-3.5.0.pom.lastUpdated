@@ -1,0 +1,6 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Mon Jun 09 17:29:13 CST 2025
+@default-maven-central-http\://repo.psbc.com/artifactory/maven-central/.lastUpdated=1749461353175
+http\://repo.psbc.com/artifactory/maven-central/.error=Could not transfer artifact org.springframework.boot\:spring-boot-starter-parent\:pom\:3.5.0 from/to maven-central (http\://repo.psbc.com/artifactory/maven-central/)\: transfer failed for http\://repo.psbc.com/artifactory/maven-central/org/springframework/boot/spring-boot-starter-parent/3.5.0/spring-boot-starter-parent-3.5.0.pom
+http\://repo.psbc.com/artifactory/cpufp-maven-group/.error=Could not transfer artifact org.springframework.boot\:spring-boot-starter-parent\:pom\:3.5.0 from/to cpufp-maven-group (http\://repo.psbc.com/artifactory/cpufp-maven-group/)\: transfer failed for http\://repo.psbc.com/artifactory/cpufp-maven-group/org/springframework/boot/spring-boot-starter-parent/3.5.0/spring-boot-starter-parent-3.5.0.pom
+2ca4768b80848375b85bfbc3686ef00b1acee6aa@default-cpufp-maven-group-http\://repo.psbc.com/artifactory/cpufp-maven-group/.lastUpdated=1749461353155

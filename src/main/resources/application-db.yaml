@@ -1,14 +1,14 @@
 spring:
   datasource:
-    url: jdbc:h2:./dev/h2db;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;AUTO_SERVER=TRUE;IFEXISTS=FALSE
+    url: jdbc:h2:file:/home/jim/DevCodes/iTimer-Server/devdb/h2db;IFEXISTS=FALSE
     driver-class-name: org.h2.Driver
     username: sa
-    password: solora                  # 默认空密码
+    password:
   h2:
     console:
-      enabled: true             # 开启网页控制台
-      path: /h2db         # 控制台访问地址
+      enabled: true
+      path: /h2db
   jpa:
     hibernate:
-      ddl-auto: update          # 自动建表
-    show-sql: true              # 控制台显示 SQL
+      ddl-auto: update
+    show-sql: true

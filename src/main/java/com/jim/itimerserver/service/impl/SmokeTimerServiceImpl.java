@@ -6,6 +6,7 @@ import com.jim.itimerserver.service.SmokeTimerService;
 import com.jim.itimerserver.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
 
 @Service
 public class SmokeTimerServiceImpl implements SmokeTimerService {
@@ -15,13 +16,27 @@ public class SmokeTimerServiceImpl implements SmokeTimerService {
 
     @Override
     public String mark() {
-        SmokeTimer smokeTimer = new SmokeTimer();
-        smokeTimer.setDate(DateUtils.getCurrentDay());
-        smokeTimer.setTime(DateUtils.getCurrentTime());
+        // 计算日期 - 时间
+        String datetime = DateUtils.getCurrentTime();
+        String time = datetime.substring(8,datetime.length());
+        String date = datetime.substring(0,8);
+
+        // 对象赋值
+        SmokeTimer smokeTimer = SmokeTimer.builder()
+                .date(date)
+                .time(time)
+                .build();
+
+        // 入表
         int res = mapper.insert(smokeTimer);
         if(res != 1) {
             throw new RuntimeException("新增失败");
         }
         return String.valueOf(mapper.countAll());
     }
+
+    public String countAll() {
+        return String.valueOf(mapper.countAll());
+    }
+
 }

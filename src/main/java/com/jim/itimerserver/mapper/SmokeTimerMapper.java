@@ -4,6 +4,7 @@ import com.jim.itimerserver.entity.model.DailyCount;
 import com.jim.itimerserver.entity.timer.SmokeTimer;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
