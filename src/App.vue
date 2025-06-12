@@ -1,5 +1,6 @@
 <template>
-  <div class="container">
+
+  <div id="timer-container">
     <WelcomeItem>
       <template #icon>
         <NoSmoke />
@@ -12,7 +13,13 @@
         <span class="days">{{ timePassed.milliseconds }}</span><span class="units">毫秒</span>
       </template>
       已经克服了<span class="times">{{result}}</span>次吸烟的欲望，再多坚持一下吧！
+      <button @click="moveUp" class="icon-button" title="删除">📈</button>
+
     </WelcomeItem>
+  </div>
+
+  <div class="chart-container" v-if="hidden">
+    <BarChart/>
   </div>
 
   <div class="floot">
@@ -24,9 +31,10 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import WelcomeItem from './components/WelcomeItem.vue'
+import BarChart from "./components/BarChart.vue"
+
 import NoSmoke from './components/icons/IconNoSmoke.vue'
 import {getData} from '@/api/api'
-
 
 
 interface TimePassed {
@@ -91,7 +99,7 @@ function getStr(timePassed:TimePassed):string  {
 }
 
 // 次数
-const result = ref<any>(null)
+const result = ref<any>(222)
 
 onMounted(async () => {
   try {
@@ -101,15 +109,31 @@ onMounted(async () => {
   }
 })
 
-setInterval(async () => {
-  const res = await fetch('/api/iTimer/smoke/count')
-  result.value = await res.json()
-}, 5000)
+
+// TODO 部署放开
+// setInterval(async () => {
+//   const res = await fetch('/api/iTimer/smoke/count')
+//   result.value = await res.json()
+// }, 5000)
 
 // 输出一句话
 onMounted(() => {
   console.log('尽早戒烟有益身体健康！！！')
 })
+
+// 柱状图相关
+const hidden = ref(false)
+function show_chart() {
+  hidden.value = ! hidden.value
+}
+
+function moveUp() {
+  const el = document.getElementById('timer-container')
+  if (el) {
+    el.style.transition = 'transform 0.5s ease'
+    el.style.transform = 'translateY(-50px)'
+  }
+}
 </script>
 
 <style scoped >
@@ -138,4 +162,28 @@ onMounted(() => {
   font-size: 12px;
   font-weight: lighter;
 }
+
+#timer-container {
+  position: absolute;
+  left: 30%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.chart-container {
+}
+.icon-button {
+  background: none;
+  border: none;
+  color: #00bd7e;
+  cursor: pointer;
+  padding: 4px;
+  font-size: 18px;
+}
+.icon-button:hover {
+  background-color: #f0f0f0;
+  border-radius: 4px;
+}
+
+
 </style>
