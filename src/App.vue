@@ -102,7 +102,7 @@ onMounted(async () => {
 })
 
 setInterval(async () => {
-  const res = await fetch('/api/get')
+  const res = await fetch('/api/iTimer/smoke/count')
   result.value = await res.json()
 }, 5000)
 
