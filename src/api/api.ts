@@ -1,5 +1,5 @@
 export async function getData() {
-    const response = await fetch('/api/get', {
+    const response = await fetch('/api/iTimer/smoke/count', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
