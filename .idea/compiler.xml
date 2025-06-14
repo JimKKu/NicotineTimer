@@ -8,7 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="false">
-          <entry name="$USER_HOME$/.DevTools/mvn399/repo/org/projectlombok/lombok/1.18.32/lombok-1.18.32.jar" />
+          <entry name="$USER_HOME$/DevTools/mvn3910/repo/org/projectlombok/lombok/1.18.32/lombok-1.18.32.jar" />
         </processorPath>
         <module name="iTimer-Server" />
       </profile>
