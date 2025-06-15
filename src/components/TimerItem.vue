@@ -1,5 +1,5 @@
 <template>
-  <div :class="['container',chart_flag ? 'container-top' : 'container-bottom',pic_flag ? 'container-left' : 'container-right']">
+  <div v-show="mode === 'small'" :class="['container-small',chart_flag ? 'container-small-top' : 'container-small-bottom',pic_flag ? 'container-small-left' : 'container-small-right']">
     <WelcomeItem>
       <template #icon>
         <NoSmoke />
@@ -14,13 +14,32 @@
       已经克服了<span class="times">{{result}}</span>次吸烟的欲望，再多坚持一下吧！
     </WelcomeItem>
   </div>
+
+  <div v-show="mode === 'big'" class="container-big">
+    <div class="big-day">
+      天
+    </div>
+    <div class="big-hour">
+      时
+    </div>
+    <div class="big-min">
+      分
+    </div>
+    <div class="big-second">
+      秒
+    </div>
+    <div class="big-millisecond">
+      毫秒
+    </div>
+  </div>
 </template>
 
 
 <script setup lang="ts">
-const {chart_flag,pic_flag} = defineProps<{
+const {chart_flag,pic_flag,mode} = defineProps<{
   chart_flag: boolean,
-  pic_flag: boolean
+  pic_flag: boolean,
+  mode: string
 
 }>()
 
@@ -130,23 +149,69 @@ setInterval(async () => {
   font-size: 12px;
   font-weight: lighter;
 }
-.container {
+.container-small {
   position: absolute;
   transform:  translate(-50%, -50%);
   transition: all 0.2s;
 }
 
-.container-top {
+.container-small-top {
   top: 36%;
 }
-.container-bottom {
+.container-small-bottom {
   top: 50%
 }
-.container-right {
+.container-small-right {
   left: 30%;
 }
-.container-left {
+.container-small-left {
   left: 28%;
+}
+
+.container-big {
+  width: 300px;
+  height: 400px;
+  background: gray;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform:  translate(-50%, -50%);
+  transition: all 0.2s;
+  padding: 2px;
+
+  text-align: center;
+  color: white;
+
+  .big-day{
+    width: 100%;
+    height: 120px;
+    background: #2c3e50;
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+  .big-hour{
+    background: green;
+    width: 50%;
+    height: 120px;
+    position: absolute;
+    left: 0;
+    top: 120px;
+  }
+  .big-min{
+    background: red;
+    width: 50%;
+    height: 120px;
+    position: absolute;
+    right: 0;
+    top: 120px
+  }
+  .big-second{
+
+  }
+  .big-millisecond{
+
+  }
 }
 
 </style>
