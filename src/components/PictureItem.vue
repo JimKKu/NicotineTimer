@@ -1,6 +1,10 @@
 <template>
   <div :class="['container',hidden ? 'container-show' : 'container-hidden',!chart_flag ? 'container-tall' : 'container-short']">
-    内容待开发
+    内<br/>
+    容<br/>
+    待<br/>
+    开<br/>
+    发
   </div>
 </template>
 
@@ -21,9 +25,7 @@ const { hidden } = defineProps<{
   transition: all .2s ease-in-out;
   border-left: 1px solid gray;
   text-align: center;
-  color: #cccccc;
-  font-size: 120px;
-  writing-mode: vertical-rl;
+  color: red;
 }
 
 .container-hidden {
@@ -36,11 +38,11 @@ const { hidden } = defineProps<{
 
 .container-tall {
   height: 100%;
-  line-height: 100vh;
+  line-height: 20vh;
 }
 
 .container-short {
   height: 76%;
-  line-height: 76vh;
+  line-height: 15vh;
 }
 </style>
