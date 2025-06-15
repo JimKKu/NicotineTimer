@@ -20,6 +20,7 @@ export default defineConfig({
       // 将 /api 开头的请求转发到目标地址
       '/api': {
         target: 'http://101.133.229.103:15503', // 你的后端服务地址
+        // target: 'http://127.0.0.1:8080', // 你的后端服务地址
         changeOrigin: true,
         rewrite: path => path.replace(/^\/api/, '')
       }

@@ -1,5 +1,5 @@
 <template>
-  <div :class="['container',hidden ? 'container-top' : 'container-bottom']">
+  <div :class="['container',chart_flag ? 'container-top' : 'container-bottom',pic_flag ? 'container-left' : 'container-right']">
     <WelcomeItem>
       <template #icon>
         <NoSmoke />
@@ -18,8 +18,10 @@
 
 
 <script setup lang="ts">
-const {hidden} = defineProps<{
-  hidden: boolean,
+const {chart_flag,pic_flag} = defineProps<{
+  chart_flag: boolean,
+  pic_flag: boolean
+
 }>()
 
 import WelcomeItem from "@/components/WelcomeItem.vue";
@@ -130,15 +132,21 @@ setInterval(async () => {
 }
 .container {
   position: absolute;
-  left: 30%;
   transform:  translate(-50%, -50%);
   transition: all 0.2s;
 }
 
 .container-top {
-  top: 30%;
+  top: 36%;
 }
 .container-bottom {
   top: 50%
 }
+.container-right {
+  left: 30%;
+}
+.container-left {
+  left: 28%;
+}
+
 </style>

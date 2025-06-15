@@ -124,6 +124,7 @@ onBeforeUnmount(() => {
 <style scoped>
 .container {
   width: 100%;
+  height: 24%;
   transition: all .2s;
   position: absolute;
   left: 0;
@@ -134,7 +135,7 @@ onBeforeUnmount(() => {
 .chart {
   margin: 0 auto;
   width: 80%;
-  height: 300px;
+  height: 100%;
   transition: all 1s;
 }
 .container-show {
@@ -144,10 +145,5 @@ onBeforeUnmount(() => {
   transform: translateY(200%);
   opacity: 0%;
   bottom: -100%;
-}
-.button {
-  position: absolute;
-  left: 0;
-  bottom: 0;
 }
 </style>
