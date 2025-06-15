@@ -25,7 +25,9 @@ const { hidden } = defineProps<{
   transition: all .2s ease-in-out;
   border-left: 1px solid gray;
   text-align: center;
-  color: red;
+  color: gray;
+  font-weight: bold;
+  font-size: 64px;
 }
 
 .container-hidden {
