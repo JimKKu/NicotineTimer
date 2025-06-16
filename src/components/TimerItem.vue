@@ -9,28 +9,24 @@
         <span class="days">{{ timePassed.hours }}</span><span class="units">小时</span>
         <span class="days">{{ timePassed.minutes }}</span><span class="units">分钟</span>
         <span class="days">{{ timePassed.seconds }}</span><span class="units">秒</span>
-        <span class="days">{{ timePassed.milliseconds }}</span><span class="units">毫秒</span>
+        <span class="days">{{ timePassed.mills }}</span><span class="units">毫秒</span>
       </template>
-      已经克服了<span class="times">{{result}}</span>次吸烟的欲望，再多坚持一下吧！
+      已经克服了<span class="word-small">{{result}}</span>次吸烟的欲望，再多坚持一下吧！
     </WelcomeItem>
   </div>
 
-  <div v-show="mode === 'big'" class="container-big">
-    <div class="big-day">
-      天
-    </div>
-    <div class="big-hour">
-      时
-    </div>
-    <div class="big-min">
-      分
-    </div>
-    <div class="big-second">
-      秒
-    </div>
-    <div class="big-millisecond">
-      毫秒
-    </div>
+  <!-- 让数字一跳一跳的 -->
+  <div v-show="mode === 'big'" :class="['container-big',chart_flag ? 'container-big-top' : 'container-big-bottom', pic_flag ? 'container-big-left' : 'container-big-right']">
+    <div class="big-timer big-mill">次<br/>{{ result }}</div>
+    <div class="big-unit">天</div>
+    <div class="big-timer big-day">{{ timePassed.days }}</div>
+    <div class="big-unit">时</div>
+    <div class="big-timer big-hour">{{ timePassed.hours }}</div>
+    <div class="big-unit">分</div>
+    <div class="big-timer big-min">{{ timePassed.minutes }}</div>
+    <div class="big-unit">秒</div>
+    <div class="big-timer big-second">{{ timePassed.seconds }}</div>
+    <span class="word-big">已经克服了<span>{{result}}</span>次吸烟的欲望，再多坚持一下吧！</span>
   </div>
 </template>
 
@@ -45,9 +41,9 @@ const {chart_flag,pic_flag,mode} = defineProps<{
 
 import WelcomeItem from "@/components/WelcomeItem.vue";
 import NoSmoke from "@/components/icons/IconNoSmoke.vue";
-import {onMounted, onUnmounted, ref} from "vue";
+import {onMounted, onUnmounted, ref, watch} from "vue";
 import {getData} from "@/api/api.ts";
-
+import {Setting} from '@element-plus/icons-vue'
 
 
 interface TimePassed {
@@ -55,7 +51,7 @@ interface TimePassed {
   hours: string
   minutes: string
   seconds: string
-  milliseconds: string
+  mills: string
 }
 
 const timePassed = ref<TimePassed>({
@@ -63,7 +59,7 @@ const timePassed = ref<TimePassed>({
   hours: '00',
   minutes: '00',
   seconds: '00',
-  milliseconds: '000',
+  mills: '000',
 })
 
 const target = new Date('2025-06-02T15:00:00')
@@ -90,7 +86,7 @@ const updateTime = () => {
     hours: pad2(hours),
     minutes: pad2(minutes),
     seconds: pad2(seconds),
-    milliseconds: pad3(ms),
+    mills: pad3(ms),
   }
 }
 
@@ -103,14 +99,6 @@ onUnmounted(() => {
   clearInterval(timer)
 })
 
-function getStr(timePassed:TimePassed):string  {
-  return timePassed.days + '天' +
-      timePassed.hours  + ' 小时' +
-      timePassed.minutes  + ' 分钟' +
-      timePassed.seconds  + ' 秒' +
-      timePassed.milliseconds  + ' 毫秒'
-}
-
 // 次数
 const result = ref<any>(null)
 
@@ -122,18 +110,18 @@ onMounted(async () => {
   }
 })
 
-
-// TODO 部署放开
 setInterval(async () => {
   const res = await fetch('/api/iTimer/smoke/count')
   result.value = await res.json()
 }, 5000)
 
+// 大字动画效果
+
 </script>
 
 
 <style scoped>
-.times {
+.word-small {
   font-size: 24px;
   color: #00bd7e;
   font-weight: bold;
@@ -168,50 +156,198 @@ setInterval(async () => {
   left: 28%;
 }
 
+.container-big:hover {
+  box-shadow: 2px 2px 6px #8e8e8e,-2px -2px 6px #fff;
+}
+
 .container-big {
-  width: 300px;
-  height: 400px;
-  background: gray;
+  padding: 18px 0;
+  border-radius: 16px;
+  width: 920px;
+  height: 180px;
   position: absolute;
-  left: 50%;
-  top: 50%;
   transform:  translate(-50%, -50%);
   transition: all 0.2s;
-  padding: 2px;
+
+  display: flex;
+  flex-direction: raw;
 
   text-align: center;
   color: white;
-
-  .big-day{
-    width: 100%;
-    height: 120px;
-    background: #2c3e50;
+  .word-big {
     position: absolute;
-    left: 0;
-    top: 0;
+    left: 50%;
+    top: 110%;
+    transform: translateX(-50%);
+    color: gray;
+    border-bottom: 1px solid #cdcdcd;
+    span {
+      color: #00bd7e;
+      font-size: 24px;
+      font-weight: bold;
+      padding: 8px;
+    }
   }
-  .big-hour{
-    background: green;
-    width: 50%;
-    height: 120px;
+
+  .settings {
+    width: 400px;
+    height: 600px;
     position: absolute;
-    left: 0;
+    left: -50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    box-shadow: 0px 0px 0px transparent,0px 0px 0px transparent,2px 2px 6px #8e8e8e inset,-2px -2px 6px #ffffff inset;
+    border-radius: 26px;
+  }
+  .big-timer {
+    margin: auto;
+    width: 144px;
+    height: 144px;
+    box-sizing: border-box;
+    box-shadow: 0px 0px 0px transparent,0px 0px 0px transparent,2px 2px 6px #8e8e8e inset,-2px -2px 6px #ffffff inset;
+    border-radius: 20px;
+    line-height: 144px;
+    color: gray;
+    font-weight: bold;
+    font-size: 106px;
+    font-family: "Berlin Sans FB", sans-serif;
+    background: #e1e1e1;
+    transition:  all .2s;
+  }
+
+  .big-timer:hover {
+    box-shadow: 2px 2px 6px #8e8e8e,-2px -2px 6px #fff,0px 0px 0px transparent inset,0px 0px 0px transparent inset;
+  }
+  .big-unit {
+    position: relative;
     top: 120px;
+    color: #cfcfcf;
   }
-  .big-min{
-    background: red;
-    width: 50%;
-    height: 120px;
-    position: absolute;
-    right: 0;
-    top: 120px
+  .big-mill{
+    font-size: 58px;
+    line-height: 66px;
+    padding: 6px;
+    color: #00bd7e;
+    box-shadow: none;
+    border: 1px solid;
+    box-sizing: border-box;
   }
-  .big-second{
 
-  }
-  .big-millisecond{
-
+  .big-mill:hover {
+    border: none;
   }
 }
 
+.container-big-left {
+  left: 40%;
+}
+.container-big-right {
+  left: 50%;
+}
+.container-big-top {
+  top: 40%;
+}
+.container-big-bottom {
+  top: 50%;
+}
 </style>
+
+<!--  <div class="background">-->
+<!--    <i class="set-icon-day"><Setting/></i>-->
+<!--    <i class="set-icon-hour"><Setting/></i>-->
+<!--    <i class="set-icon-min"><Setting/></i>-->
+<!--    <i class="set-icon-second"><Setting/></i>-->
+<!--    <i class="set-icon-mill"><Setting/></i>-->
+<!--  </div>-->
+
+<!--.background {-->
+<!--position: absolute;-->
+<!--left: 0;-->
+<!--top: 0;-->
+<!--width: 100%;-->
+<!--height: 100%;-->
+
+<!--i {-->
+<!--display: inline-block;-->
+<!--position: absolute;-->
+<!--color: gray;-->
+<!--text-align: center;-->
+<!--svg {-->
+<!--width: 24px;-->
+<!--height: 24px;-->
+<!--opacity: 0.16;-->
+<!--}-->
+<!--}-->
+
+<!--.set-icon-day {-->
+<!--position: absolute;-->
+<!--left: -50%;-->
+<!--top: -50%;-->
+<!--animation: rotate-right 520s infinite linear;-->
+<!--svg {-->
+<!--width: 1600px;-->
+<!--height: 1600px;-->
+<!--}-->
+<!--}-->
+
+<!--.set-icon-hour {-->
+<!--left: 24%;-->
+<!--top: 30%;-->
+<!--animation: rotate-left 360s infinite linear;-->
+
+<!--svg {-->
+<!--width: 800px;-->
+<!--height: 800px;-->
+<!--}-->
+<!--}-->
+<!--.set-icon-min {-->
+<!--left: 55%;-->
+<!--top: 5%;-->
+<!--animation: rotate-right 30s infinite linear;-->
+
+<!--svg {-->
+<!--width: 500px;-->
+<!--height: 500px;-->
+<!--}-->
+<!--}-->
+
+<!--.set-icon-second {-->
+<!--left: 76%;-->
+<!--top: 43%;-->
+<!--animation: rotate-left 6s infinite linear;-->
+
+<!--svg {-->
+<!--width: 300px;-->
+<!--height: 300px;-->
+<!--}-->
+<!--}-->
+<!--.set-icon-mill {-->
+<!--position: absolute;-->
+<!--left: 89%;-->
+<!--top: 33%;-->
+<!--animation: rotate-right 3s infinite linear;-->
+
+<!--svg {-->
+<!--width: 200px;-->
+<!--height: 200px;-->
+<!--}-->
+<!--}-->
+<!--}-->
+
+<!--@keyframes rotate-right {-->
+<!--0% {-->
+<!--transform: rotate(0);-->
+<!--}-->
+<!--100% {-->
+<!--transform: rotate(360deg);-->
+<!--}-->
+<!--}-->
+
+<!--@keyframes rotate-left {-->
+<!--0% {-->
+<!--transform: rotate(0);-->
+<!--}-->
+<!--100% {-->
+<!--transform: rotate(-360deg);-->
+<!--}-->
+<!--}-->
