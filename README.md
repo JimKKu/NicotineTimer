@@ -1,3 +1,9 @@
+# Basic
+```bash
+nvm use 18
+npm install
+```
+
 # Echarts
 ```bash
 npm install echarts

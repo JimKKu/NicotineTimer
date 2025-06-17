@@ -213,6 +213,10 @@ setInterval(async () => {
     font-family: "Berlin Sans FB", sans-serif;
     background: #e1e1e1;
     transition:  all .2s;
+
+    text-shadow:
+        1px 1px 2px #fff,
+        -1px -1px 2px #aaa;
   }
 
   .big-timer:hover {
