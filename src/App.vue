@@ -5,6 +5,7 @@
     <button @click="show_chart"><el-icon><TrendCharts /></el-icon></button>
     <button @click="show_pic"><el-icon><Camera /></el-icon></button>
     <button @click="switch_timer"><el-icon><Switch /></el-icon></button>
+    <button @click="handleFullScreen"><el-icon><FullScreen /></el-icon></button>
 <!--    <button @click="switch_settings"-->
 <!--            :v-show="time_mode !== 'big'"-->
 <!--            :class="[time_mode !== 'big' ? 'setting-button-show' : 'setting-button-hidden']"-->
@@ -29,8 +30,13 @@ import BottomItem from './components/BottomItem.vue'
 import TimerItem from './components/TimerItem.vue'
 import PictureItem from './components/PictureItem.vue'
 // ICON
-import { TrendCharts,Camera,Switch,Setting } from '@element-plus/icons-vue'
+import { TrendCharts,Camera,Switch,Setting,FullScreen } from '@element-plus/icons-vue'
+import { useFullscreen } from './utils/ScreenUtils.ts'
 
+const { isFullscreen, toggleFullscreen } = useFullscreen()
+function handleFullScreen() {
+  toggleFullscreen()
+}
 
 // 输出一句话
 onMounted(() => {
