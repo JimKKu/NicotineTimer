@@ -1,10 +1,10 @@
 <template>
-
-  <!-- 按钮组 -->
+  <!-- 功能按钮组 -->
   <div class="button-group">
     <button @click="show_chart"><el-icon><TrendCharts /></el-icon></button>
     <button @click="show_pic"><el-icon><Camera /></el-icon></button>
     <button @click="switch_timer"><el-icon><Switch /></el-icon></button>
+    <!-- <button @click="switch_timer"><el-icon><IconTarget /></el-icon></button> -->
     <button @click="handleFullScreen"><el-icon><FullScreen /></el-icon></button>
 <!--    <button @click="switch_settings"-->
 <!--            :v-show="time_mode !== 'big'"-->
@@ -15,6 +15,8 @@
   </div>
   <!-- 计时器 -->
   <TimerItem :mode="time_mode" :chart_flag="chart_flag" :pic_flag="pic_flag"/>
+  <!-- 目标 -->
+  <TargetsItem  :chart_flag="chart_flag" :pic_flag="pic_flag"/>
   <!-- 柱状图 -->
   <ChartItem :hidden="chart_flag" style="z-index: 100"/>
   <!-- 底部文字 -->
@@ -29,9 +31,13 @@ import ChartItem from './components/ChartItem.vue'
 import BottomItem from './components/BottomItem.vue'
 import TimerItem from './components/TimerItem.vue'
 import PictureItem from './components/PictureItem.vue'
+import TargetsItem from './components/TargetsItem.vue'
+import { useFullscreen } from './utils/ScreenUtils.ts'
+
 // ICON
 import { TrendCharts,Camera,Switch,Setting,FullScreen } from '@element-plus/icons-vue'
-import { useFullscreen } from './utils/ScreenUtils.ts'
+import IconTarget from './components/icons/IconTarget.vue'
+
 
 const { isFullscreen, toggleFullscreen } = useFullscreen()
 function handleFullScreen() {
@@ -44,7 +50,7 @@ onMounted(() => {
 })
 
 // 柱状图相关
-const chart_flag = ref(false)
+const chart_flag = ref(true)
 
 function show_chart() {
   chart_flag.value = ! chart_flag.value
@@ -70,28 +76,32 @@ const setting_flag = ref(false)
 function switch_settings() {
   setting_flag.value = !setting_flag.value
 }
+
+// 目标相关
 </script>
 
 <style scoped>
 .button-group {
-  display: flex;
+  display: flex inline-block;
   flex-direction: row;
-}
-button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 4px;
-  font-size: 18px;
-  margin: 10px 0 10px 20px;
-  border-bottom: 1px solid gray;
-  color: gray;
-  transition: all .2s ease;
-}
-button:hover {
-  background-color: #f0f0f0;
-  border-radius: 4px 4px 0 0;
-  color: #00bd7e;
+  width: 40%;
+
+  button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    font-size: 18px;
+    margin: 10px 0 10px 20px;
+    border-bottom: 1px solid gray;
+    color: gray;
+    transition: all .2s ease;
+  }
+  button:hover {
+    background-color: #f0f0f0;
+    border-radius: 4px 4px 0 0;
+    color: #00bd7e;
+  }
 }
 
 .setting-button-icon {

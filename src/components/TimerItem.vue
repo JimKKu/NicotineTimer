@@ -157,17 +157,18 @@ setInterval(async () => {
 }
 
 .container-big:hover {
-  box-shadow: 2px 2px 6px #8e8e8e,-2px -2px 6px #fff;
+  box-shadow: 4px 4px 12px #6e6e6e, -4px -4px 12px #ffffff;
 }
 
 .container-big {
-  padding: 18px 0;
+  padding: 18px;
   border-radius: 16px;
-  width: 920px;
+  width: 956px;
   height: 180px;
   position: absolute;
   transform:  translate(-50%, -50%);
   transition: all 0.2s;
+  box-shadow: 2px 2px 6px #8e8e8e,-2px -2px 6px #fff;
 
   display: flex;
   flex-direction: raw;
@@ -209,7 +210,7 @@ setInterval(async () => {
     line-height: 144px;
     color: gray;
     font-weight: bold;
-    font-size: 106px;
+    font-size: 100px;
     font-family: "Berlin Sans FB", sans-serif;
     background: #e1e1e1;
     transition:  all .2s;
@@ -221,6 +222,8 @@ setInterval(async () => {
 
   .big-timer:hover {
     box-shadow: 2px 2px 6px #8e8e8e,-2px -2px 6px #fff,0px 0px 0px transparent inset,0px 0px 0px transparent inset;
+    border: 0 solid #fff;
+    font-size: 106px;
   }
   .big-unit {
     position: relative;
@@ -238,8 +241,9 @@ setInterval(async () => {
   }
 
   .big-mill:hover {
-    border: none;
+    font-size: 62px;
   }
+
 }
 
 .container-big-left {
