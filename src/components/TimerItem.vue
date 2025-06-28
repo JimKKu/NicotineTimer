@@ -158,7 +158,7 @@ setInterval(async () => {
 .container-big {
   padding: 18px;
   border-radius: 16px;
-  width: 956px;
+  width: 900px;
   height: 180px;
   position: absolute;
   transform:  translate(-50%, -50%);
@@ -220,10 +220,16 @@ setInterval(async () => {
     border: 0 solid #fff;
     font-size: 106px;
   }
+  .big-day {
+    box-shadow: 2px 2px 6px #8e8e8e,-2px -2px 6px #fff,0px 0px 0px transparent inset,0px 0px 0px transparent inset;
+    border: 0 solid #fff;
+    font-size: 106px;
+  }
   .big-unit {
     position: relative;
-    top: 120px;
-    color: #cfcfcf;
+    top: 116px;
+    right: -94px;
+    color: rgba(128, 128, 128, 0.489);
   }
   .big-mill{
     font-size: 58px;
