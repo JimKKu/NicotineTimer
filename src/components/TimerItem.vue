@@ -215,12 +215,8 @@ setInterval(async () => {
         -1px -1px 2px #aaa;
   }
 
+  .big-day,
   .big-timer:hover {
-    box-shadow: 2px 2px 6px #8e8e8e,-2px -2px 6px #fff,0px 0px 0px transparent inset,0px 0px 0px transparent inset;
-    border: 0 solid #fff;
-    font-size: 106px;
-  }
-  .big-day {
     box-shadow: 2px 2px 6px #8e8e8e,-2px -2px 6px #fff,0px 0px 0px transparent inset,0px 0px 0px transparent inset;
     border: 0 solid #fff;
     font-size: 106px;
