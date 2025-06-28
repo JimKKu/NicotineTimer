@@ -155,11 +155,6 @@ setInterval(async () => {
 .container-small-left {
   left: 28%;
 }
-
-.container-big:hover {
-  box-shadow: 4px 4px 12px #6e6e6e, -4px -4px 12px #ffffff;
-}
-
 .container-big {
   padding: 18px;
   border-radius: 16px;
