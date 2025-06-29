@@ -1,6 +1,7 @@
 <template>
   <div :class="['container', hidden ? 'container-show' : 'container-hidden']">
     <div ref="chartRef" class="chart"></div>
+    <div class="guide"></div>
   </div>
 </template>
 
@@ -47,19 +48,53 @@ interface ChartData {
   count: number
 }
 
-onMounted(async () => {
-  // 获取数据并解析为固定类型
-  const res = await fetch('/api/iTimer/smoke/chart/20250602/' + getToday())
-  const data: ChartData[] = await res.json()
+function getDateRange(start: string, end: string): string[] {
+  const result: string[] = []
+  const current = new Date(
+    parseInt(start.slice(0, 4)),
+    parseInt(start.slice(4, 6)) - 1,
+    parseInt(start.slice(6, 8))
+  )
+  const endDate = new Date(
+    parseInt(end.slice(0, 4)),
+    parseInt(end.slice(4, 6)) - 1,
+    parseInt(end.slice(6, 8))
+  )
 
-  const rawDates = data.map((d: ChartData) => d.date)
-  const counts = data.map((d: ChartData) => d.count)
+  while (current <= endDate) {
+    const yyyy = current.getFullYear()
+    const mm = String(current.getMonth() + 1).padStart(2, '0')
+    const dd = String(current.getDate()).padStart(2, '0')
+    result.push(`${yyyy}${mm}${dd}`)
+    current.setDate(current.getDate() + 1)
+  }
+  return result
+}
+
+onMounted(async () => {
+  const today = getToday()
+  const startDate = '20250602'
+
+  const res = await fetch(`/api/iTimer/smoke/chart/${startDate}/${today}`)
+  const originalData: ChartData[] = await res.json()
+
+  const dateMap = new Map<string, number>()
+  originalData.forEach(d => {
+    dateMap.set(d.date, d.count)
+  })
+
+  const fullDates = getDateRange(startDate, today)
 
   const xLabels: string[] = []
+  const counts: number[] = []
+
   let hasMonth1 = false
 
-  for (let i = 0; i < rawDates.length; i++) {
-    const dateStr = rawDates[i]
+  for (let i = 0; i < fullDates.length; i++) {
+    const dateStr = fullDates[i]
+    const count = dateMap.get(dateStr) ?? 0
+    counts.push(count)
+
     const day = dateStr.slice(6, 8)
     const month = parseInt(dateStr.slice(4, 6), 10) + '月'
 
@@ -72,11 +107,11 @@ onMounted(async () => {
   }
 
   if (!hasMonth1 && xLabels.length > 0) {
-    const firstMonth = parseInt(rawDates[0].slice(4, 6), 10) + '月'
+    const firstMonth = parseInt(fullDates[0].slice(4, 6), 10) + '月'
     xLabels[0] = firstMonth
   }
 
-  // 初始化图表实例
+  // 初始化 echarts（不变）
   if (chartRef.value) {
     chartInstance = echarts.init(chartRef.value)
 
@@ -145,5 +180,21 @@ onBeforeUnmount(() => {
   transform: translateY(200%);
   opacity: 0%;
   bottom: -100%;
+}
+
+.guide::after {
+  content: "尼古丁的回响（次/天）";
+  display: inline-block;
+  background-color: #5470C6;
+  width: 178px;
+  height: 26px;
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 4px;
+  text-align: center;
+  line-height: 26px;
+  color: #fff;
 }
 </style>

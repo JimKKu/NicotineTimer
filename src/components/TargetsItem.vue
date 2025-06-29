@@ -1,6 +1,6 @@
 <template>
-    <div :class="['target-group',pic_flag ?'left' :  'right',chart_flag ? 'top' : 'bottom']">
-        <MoonIcon/>
+    <div :class="['target-group',pic_flag ?'left' :  'right',chart_flag ? 'show-chart' : 'bottom']">
+        <MoonIcon />
         <NoSmokingIcon />
         <ThinIcon />
         <MoneyIcon />
@@ -8,9 +8,8 @@
         <BicycleIcon />
         <DriverIcon class="finished"/>
     </div>
-    <!-- <div :class="['guide',pic_flag ?'left' :  'right']">
-        <div>进行中</div>
-        <div>已完成</div>
+    <!-- <div :class="['guide',pic_flag ?'guide-left' :  'guide-right',show_flag ? 'guide-bottom' : 'guide-top']">
+        <div @click="show">2025年计划清单</div>
     </div> -->
 </template>
 
@@ -23,10 +22,27 @@ import MoonIcon from './targets/MoonIcon.vue'
 import MoneyIcon from './targets/MoneyIcon.vue'
 import FeetIcon from './targets/FeetIcon.vue'
 
-const {chart_flag,pic_flag} = defineProps<{
-  chart_flag: boolean,
+import {onMounted, ref} from 'vue'
+
+const {pic_flag,chart_flag} = defineProps<{
   pic_flag: boolean,
+  chart_flag: boolean
 }>()
+
+const show_flag = ref(true)
+function show () {
+    show_flag.value = !show_flag.value
+}
+
+onMounted(() => {
+    setTimeout(() => {
+        show_flag.value = !show_flag.value
+    },0)
+    setTimeout(() => {
+        show_flag.value = !show_flag.value
+    },1000)
+})
+
 
 
 
@@ -42,9 +58,7 @@ const {chart_flag,pic_flag} = defineProps<{
   padding: 0 10px 10px 0;
   position: absolute;
   text-align: right;
-  border-bottom: 1px solid rgba(211, 209, 209);
   transition: all .2s;
-  top: 0;
 
   svg {
     width: 24px;
@@ -74,10 +88,21 @@ const {chart_flag,pic_flag} = defineProps<{
     right: 0
 }
 
+.top {
+    bottom: -44px;
+}
+
+.bottom {
+    bottom: 0;
+}
+
+.show-chart {
+    bottom: 24%;
+}
+
 .guide {
     position: absolute;
-    width: 20%;
-    top: 44px;
+    width: 136px;
     display: flex;
     flex-direction: row;
     transition: all .2s;
@@ -86,11 +111,11 @@ const {chart_flag,pic_flag} = defineProps<{
         display: inline-block;
     }
 
-    :nth-child(1),
-    :nth-child(2) {
+    /* :nth-child(1), */
+    :nth-child(1) {
         content: "";
         display: inline-block;
-        width: 50%;
+        width: 100%;
         height: 24px;
         line-height: 24px;
         font-size: 13px;
@@ -99,18 +124,34 @@ const {chart_flag,pic_flag} = defineProps<{
         vertical-align: middle;
         text-align: center;
         padding: 0 6px;
-    }
+        border: 1px solid rgba(128, 128, 128, 0.5);
+}
 
 
 
-    :nth-child(1) {
+    /* :nth-child(1) {
         box-shadow: 2px 2px 6px #8e8e8e inset,-2px -2px 6px #fff inset;
     }
     :nth-child(2) {
         border: 1px solid gray;
-    }
-
-
+    } */
 
 }
+.guide-top {
+    top: 0;
+    width: 136px;
+}
+.guide-bottom {
+    top: 44px;
+}
+
+.guide-left {
+    right: 600px;
+    width: 136px;
+}
+
+.guide-right {
+    right: 0
+}
+
 </style>
