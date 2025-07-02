@@ -25,7 +25,12 @@
     <div class="big-unit">分</div>
     <div class="big-timer big-min">{{ timePassed.minutes }}</div>
     <div class="big-unit">秒</div>
-    <div :class="['big-timer','big-second',isBeating ? 'beating' : '']">{{ timePassed.seconds }}</div>
+    <div :class="['big-timer','big-second',isBeating ? 'beating' : '']">
+      <div>
+        <span>{{ timePassed.seconds }}</span>
+        <span>{{ oldTimePassed.seconds }}</span>
+      </div>
+    </div>
     <span class="word-big">已经克服了<span>{{result}}</span>次吸烟的欲望，再多坚持一下吧！</span>
   </div>
 </template>
@@ -115,13 +120,36 @@ setInterval(async () => {
   result.value = await res.json()
 }, 5000)
 
-// 大字动画效果 - 心跳
+// 大字动画效果 - 心跳 | 定义变量
 const isBeating = ref(false)
+const oldTimePassed = ref<TimePassed>({
+  days: 0,
+  hours: '00',
+  minutes: '00',
+  seconds: '00',
+  mills: '000',
+})
+// 初始化第一秒
+onMounted(() => {
+// 判断当前秒数
+  console.log(timePassed.value.seconds)
+  if(timePassed.value.seconds === '00') {
+    oldTimePassed.value.seconds = '59'
+  } else {
+    oldTimePassed.value.seconds = timePassed.value.seconds - 1
+  }
+})
+
 watch(() => timePassed.value.seconds,() => {
   isBeating.value = true
   setTimeout(() => {
     isBeating.value = false
   },200)
+
+  setTimeout(() => {
+    oldTimePassed.value = timePassed.value
+  },600)
+
 })
 
 </script>
@@ -228,7 +256,6 @@ watch(() => timePassed.value.seconds,() => {
         -1px -1px 2px #aaa;
   }
 
-  .beating,
   .big-day,
   .big-timer:hover {
     box-shadow: 2px 2px 6px #8e8e8e,-2px -2px 6px #fff,0px 0px 0px transparent inset,0px 0px 0px transparent inset;
@@ -253,6 +280,37 @@ watch(() => timePassed.value.seconds,() => {
 
   .big-mill:hover {
     font-size: 62px;
+  }
+
+  /* 时钟跳动动画效果 */
+  .beating {
+    box-shadow: 2px 2px 6px #8e8e8e,-2px -2px 6px #fff,0px 0px 0px transparent inset,0px 0px 0px transparent inset;
+    border: 0 solid #fff;
+    font-size: 106px;
+  }
+  .big-second {
+    overflow: hidden;
+
+    div {
+      font-weight: bold;
+      letter-spacing: 0.5px; /* 稍微拉开一点字间距 */
+      transition:  all .2s;
+
+      text-shadow:
+          1px 1px 2px #fff,
+          -1px -1px 2px #aaa;
+
+      span{
+        display: inline-block;
+        font-weight: bold;
+        letter-spacing: 0.5px; /* 稍微拉开一点字间距 */
+        transition:  all .2s;
+
+        text-shadow:
+            1px 1px 2px #fff,
+            -1px -1px 2px #aaa;
+      }
+    }
   }
 
 }
