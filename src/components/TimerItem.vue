@@ -25,7 +25,7 @@
     <div class="big-unit">分</div>
     <div class="big-timer big-min">{{ timePassed.minutes }}</div>
     <div class="big-unit">秒</div>
-    <div class="big-timer big-second">{{ timePassed.seconds }}</div>
+    <div :class="['big-timer','big-second',isBeating ? 'beating' : '']">{{ timePassed.seconds }}</div>
     <span class="word-big">已经克服了<span>{{result}}</span>次吸烟的欲望，再多坚持一下吧！</span>
   </div>
 </template>
@@ -115,7 +115,14 @@ setInterval(async () => {
   result.value = await res.json()
 }, 5000)
 
-// 大字动画效果
+// 大字动画效果 - 心跳
+const isBeating = ref(false)
+watch(() => timePassed.value.seconds,() => {
+  isBeating.value = true
+  setTimeout(() => {
+    isBeating.value = false
+  },200)
+})
 
 </script>
 
@@ -204,9 +211,15 @@ setInterval(async () => {
     border-radius: 20px;
     line-height: 144px;
     color: gray;
-    font-weight: bold;
     font-size: 100px;
-    font-family: "Berlin Sans FB", sans-serif;
+    font-family:
+        "Segoe UI",         /* Windows */
+        "Helvetica Neue",   /* macOS */
+        "Noto Sans",        /* Linux 通用 */
+        "Liberation Sans",  /* Linux fallback */
+        sans-serif;
+    font-weight: bold;
+    letter-spacing: 0.5px; /* 稍微拉开一点字间距 */
     background: #e1e1e1;
     transition:  all .2s;
 
@@ -215,6 +228,7 @@ setInterval(async () => {
         -1px -1px 2px #aaa;
   }
 
+  .beating,
   .big-day,
   .big-timer:hover {
     box-shadow: 2px 2px 6px #8e8e8e,-2px -2px 6px #fff,0px 0px 0px transparent inset,0px 0px 0px transparent inset;

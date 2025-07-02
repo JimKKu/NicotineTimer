@@ -4,7 +4,7 @@
     <button @click="show_chart"><el-icon><TrendCharts /></el-icon></button>
     <button @click="show_pic"><el-icon><Camera /></el-icon></button>
     <button @click="switch_timer"><el-icon><Switch /></el-icon></button>
-    <button @click="switch_timer"><el-icon><IconTarget /></el-icon></button>
+<!--    <button @click="switch_timer"><el-icon><IconTarget /></el-icon></button>-->
     <button @click="handleFullScreen"><el-icon><FullScreen /></el-icon></button>
 <!--    <button @click="switch_settings"-->
 <!--            :v-show="time_mode !== 'big'"-->
