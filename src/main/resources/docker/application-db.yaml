@@ -6,8 +6,8 @@ spring:
     password: solora
   h2:
     console:
-      enabled: false
-      path:
+      enabled: true
+      path: /h2db
   jpa:
     hibernate:
       ddl-auto: update

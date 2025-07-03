@@ -1,5 +1,6 @@
 package com.jim.itimerserver.utils;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.util.CollectionUtils;
 
@@ -39,6 +40,13 @@ public class HttpUtils {
         String p2 = pList.get(0);
 
         return u1.equals(u2) && p1.equals(p2);
+    }
 
+    public static String getHeaderValue(HttpHeaders headers, String headerName) {
+        List<String> list = headers.get(headerName);
+        if(CollectionUtils.isEmpty(list)) {
+            throw new RuntimeException("NULL");
+        }
+        return list.get(0);
     }
 }

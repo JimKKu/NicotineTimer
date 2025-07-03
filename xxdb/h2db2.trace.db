@@ -1,0 +1,537 @@
+2025-06-12 17:08:25 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Values of types "DATE" and "INTEGER" are not comparable; SQL statement:
+select * from SMOKE_TIMER  where date between 20250602 and 20250612 [90110-214]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:632)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:477)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.value.TypeInfo.checkComparable(TypeInfo.java:766)
+	at org.h2.expression.condition.BetweenPredicate.optimize(BetweenPredicate.java:74)
+	at org.h2.expression.Expression.optimizeCondition(Expression.java:148)
+	at org.h2.command.query.Select.prepareExpressions(Select.java:1177)
+	at org.h2.command.query.Query.prepare(Query.java:218)
+	at org.h2.command.Parser.prepareCommand(Parser.java:575)
+	at org.h2.engine.SessionLocal.prepareLocal(SessionLocal.java:631)
+	at org.h2.engine.SessionLocal.prepareCommand(SessionLocal.java:554)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1116)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:237)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:223)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1339)
+	at org.h2.server.web.WebApp.query(WebApp.java:1137)
+	at org.h2.server.web.WebApp.query(WebApp.java:1113)
+	at org.h2.server.web.WebApp.process(WebApp.java:244)
+	at org.h2.server.web.WebApp.processRequest(WebApp.java:176)
+	at org.h2.server.web.JakartaWebServlet.doGet(JakartaWebServlet.java:129)
+	at org.h2.server.web.JakartaWebServlet.doPost(JakartaWebServlet.java:166)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:340)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:842)
+2025-06-12 17:09:11 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Values of types "DATE" and "INTEGER" are not comparable; SQL statement:
+select * from SMOKE_TIMER  where date between 2025-06-02 and 2025-06-12 [90110-214]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:632)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:477)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.value.TypeInfo.checkComparable(TypeInfo.java:766)
+	at org.h2.expression.condition.BetweenPredicate.optimize(BetweenPredicate.java:74)
+	at org.h2.expression.Expression.optimizeCondition(Expression.java:148)
+	at org.h2.command.query.Select.prepareExpressions(Select.java:1177)
+	at org.h2.command.query.Query.prepare(Query.java:218)
+	at org.h2.command.Parser.prepareCommand(Parser.java:575)
+	at org.h2.engine.SessionLocal.prepareLocal(SessionLocal.java:631)
+	at org.h2.engine.SessionLocal.prepareCommand(SessionLocal.java:554)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1116)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:237)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:223)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1339)
+	at org.h2.server.web.WebApp.query(WebApp.java:1137)
+	at org.h2.server.web.WebApp.query(WebApp.java:1113)
+	at org.h2.server.web.WebApp.process(WebApp.java:244)
+	at org.h2.server.web.WebApp.processRequest(WebApp.java:176)
+	at org.h2.server.web.JakartaWebServlet.doGet(JakartaWebServlet.java:129)
+	at org.h2.server.web.JakartaWebServlet.doPost(JakartaWebServlet.java:166)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:340)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:842)
+2025-06-12 17:23:41 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "YOUR_TABLE" not found; SQL statement:
+INSERT INTO your_table (ID, REV1, REV2, TIME, DATE) VALUES
+                                                        (1, '补录', NULL, '0822', '20250602'),
+                                                        (2, '补录', NULL, '0823', '20250602'),
+                                                        (3, '补录', NULL, '0902', '20250602'),
+                                                        (4, '补录', NULL, '1043', '20250602'),
+                                                        (5, '补录', NULL, '1124', '20250602'),
+                                                        (6, '补录', NULL, '1403', '20250602'),
+                                                        (7, '补录', NULL, '1457', '20250602'),
+                                                        (8, '补录', NULL, '1548', '20250602'),
+                                                        (9, '补录', NULL, '1813', '20250602'),
+                                                        (10, '补录', NULL, '1930', '20250602'),
+                                                        (11, '补录', NULL, '1959', '20250602'),
+                                                        (12, '补录', NULL, '2143', '20250602'),
+                                                        (13, '补录', NULL, '0809', '20250603'),
+                                                        (14, '补录', NULL, '0820', '20250603'),
+                                                        (15, '补录', NULL, '0826', '20250603'),
+                                                        (16, '补录', NULL, '1109', '20250603'),
+                                                        (17, '补录', NULL, '1216', '20250603'),
+                                                        (18, '补录', NULL, '1241', '20250603'),
+                                                        (19, '补录', NULL, '1320', '20250603'),
+                                                        (20, '补录', NULL, '1447', '20250603'),
+                                                        (21, '补录', NULL, '1556', '20250603'),
+                                                        (22, '补录', NULL, '1737', '20250603'),
+                                                        (23, '补录', NULL, '1821', '20250603'),
+                                                        (24, '补录', NULL, '1841', '20250603'),
+                                                        (25, '补录', NULL, '1922', '20250603') [42102-214]
+2025-06-12 17:23:41 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "YOUR_TABLE" not found; SQL statement:
+INSERT INTO your_table (ID, REV1, REV2, TIME, DATE) VALUES
+                                                        (26, '补录', NULL, '1943', '20250603'),
+                                                        (27, '补录', NULL, '2043', '20250603'),
+                                                        (28, '补录', NULL, '0810', '20250604'),
+                                                        (29, '补录', NULL, '0921', '20250604'),
+                                                        (30, '补录', NULL, '1024', '20250604'),
+                                                        (31, '补录', NULL, '1245', '20250604'),
+                                                        (32, '补录', NULL, '1247', '20250604'),
+                                                        (33, '补录',NULL,'1422','20250604') [42102-214]
+2025-06-12 17:23:41 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "YOUR_TABLE" not found; SQL statement:
+INSERT INTO your_table (ID, REV1, REV2, TIME, DATE) VALUES
+(37, '补录', NULL, '1535', '20250604'),
+(38, '补录', NULL, '1851', '20250604'),
+(39, '补录', NULL, '1858', '20250604'),
+(40, '补录', NULL, '1909', '20250604'),
+(41, '补录', NULL, '1920', '20250604'),
+(42, '补录', NULL, '2043', '20250604'),
+(43, '补录', NULL, '0836', '20250605'),
+(44, '补录', NULL, '0931', '20250605'),
+(45, '补录', NULL, '1123', '20250605'),
+(46, '补录', NULL, '1135', '20250605'),
+(47, '补录', NULL, '1212', '20250605'),
+(48, '补录', NULL, '1355', '20250605'),
+(49, '补录', NULL, '1511', '20250605'),
+(50, '补录', NULL, '1558', '20250605'),
+(51, '补录', NULL, '1644', '20250605'),
+(52, '补录', NULL, '1801', '20250605'),
+(53, '补录', NULL, '1923', '20250605'),
+(54, '补录', NULL, '1950', '20250605'),
+(55, '补录', NULL, '1955', '20250605'),
+(56, '补录', NULL, '2031', '20250605'),
+(57, '补录', NULL, '0831', '20250606'),
+(58, '补录', NULL, '0942', '20250606'),
+(59, '补录', NULL, '1032', '20250606'),
+(60, '补录', NULL, '1131', '20250606'),
+(61, '补录', NULL, '1349', '20250606'),
+(62, '补录', NULL, '1422', '20250606'),
+(63, '补录', NULL, '1441', '20250606'),
+(64, '补录', NULL, '1548', '20250606'),
+(65, '补录', NULL, '1646', '20250606'),
+(66, '补录', NULL, '1706', '20250606'),
+(67, '补录', NULL, '1747', '20250606'),
+(68, '补录', NULL, '1753', '20250606'),
+(69, '补录', NULL, '2120', '20250606'),
+(70, '补录', NULL, '2135', '20250606'),
+(71, '补录', NULL, '0828', '20250607'),
+(72, '补录', NULL, '1021', '20250607'),
+(73, '补录', NULL, '1055', '20250607'),
+(74, '补录', NULL, '1223', '20250607'),
+(75, '补录', NULL, '1231', '20250607'),
+(76, '补录', NULL, '1255', '20250607'),
+(77, '补录', NULL, '1256', '20250607'),
+(78, '补录', NULL, '1344', '20250607'),
+(79, '补录', NULL, '1356', '20250607'),
+(80, '补录', NULL, '1412', '20250607'),
+(81, '补录', NULL, '1421', '20250607'),
+(82, '补录', NULL, '1548', '20250607'),
+(83, '补录', NULL, '1823', '20250607'),
+(84, '补录', NULL, '1938', '20250607'),
+(85, '补录', NULL, '2057', '20250607'),
+(86, '补录', NULL, '2131', '20250607') [42102-214]
+2025-06-12 17:23:41 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "YOUR_TABLE" not found; SQL statement:
+INSERT INTO your_table (ID, REV1, REV2, TIME, DATE) VALUES
+(87, '补录', NULL, '0816', '20250608'),
+(88, '补录', NULL, '1019', '20250608'),
+(89, '补录', NULL, '1107', '20250608'),
+(90, '补录', NULL, '1130', '20250608'),
+(91, '补录', NULL, '1205', '20250608'),
+(92, '补录', NULL, '1748', '20250608'),
+(93, '补录', NULL, '1757', '20250608'),
+(94, '补录', NULL, '1813', '20250608'),
+(95, '补录', NULL, '1840', '20250608'),
+(96, '补录', NULL, '1843', '20250608'),
+(97, '补录', NULL, '1848', '20250608'),
+(98, '补录', NULL, '1938', '20250608'),
+(99, '补录', NULL, '2059', '20250608'),
+(100, '补录', NULL, '2114', '20250608'),
+(101, '补录', NULL, '2137', '20250608'),
+(102, '补录', NULL, '0908', '20250609'),
+(103, '补录', NULL, '1009', '20250609'),
+(104, '补录', NULL, '1213', '20250609'),
+(105, '补录', NULL, '1313', '20250609'),
+(106, '补录', NULL, '1432', '20250609'),
+(107, '补录', NULL, '1556', '20250609'),
+(108, '补录', NULL, '1623', '20250609'),
+(109, '补录', NULL, '1720', '20250609'),
+(110, '补录', NULL, '2046', '20250609'),
+(111, '补录', NULL, '2143', '20250609'),
+(112, '补录', NULL, '0906', '20250610'),
+(113, '补录', NULL, '1113', '20250610'),
+(114, '补录', NULL, '1119', '20250610'),
+(115, '补录', NULL, '1225', '20250610'),
+(116, '补录', NULL, '1308', '20250610'),
+(117, '补录', NULL, '1338', '20250610'),
+(118, '补录', NULL, '1511', '20250610'),
+(119, '补录', NULL, '1516', '20250610'),
+(120, '补录', NULL, '1548', '20250610'),
+(121, '补录', NULL, '1819', '20250610'),
+(122, '补录', NULL, '1851', '20250610'),
+(123, '补录', NULL, '2001', '20250610'),
+(124, '补录', NULL, '2041', '20250610'),
+(125, '补录', NULL, '2122', '20250610'),
+(126, '补录', NULL, '2144', '20250610'),
+(127, NULL, NULL, '152530', '20250611'),
+(128, NULL, NULL, '152537', '20250611'),
+(129, NULL, NULL, '152545', '20250611'),
+(130, NULL, NULL, '155637', '20250611'),
+(131, NULL, NULL, '054137', '20250612'),
+(132, NULL, NULL, '074518', '20250612'),
+(133, NULL, NULL, '074955', '20250612') [42102-214]
+2025-06-12 17:25:12 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "[*]DELECT  FROM SMOKE_TIMER"; expected "DELETE, DROP, DECLARE, DEALLOCATE"; SQL statement:
+DELECT  FROM SMOKE_TIMER [42001-214]
+2025-06-12 17:25:43 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "[*]DELECT FROM SMOKE_TIMER"; expected "DELETE, DROP, DECLARE, DEALLOCATE"; SQL statement:
+DELECT FROM SMOKE_TIMER [42001-214]
+2025-06-12 17:27:23 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "INSERT INTO smoke_timer (rev1, date, time) VALUES\000d\000a('补录', '20240602', '0822'),\000d\000a('补录', '20240602', '0823'),\000d\000a('补录', '20240602', '0902'),\000d\000a('补录', '20240602', '1043'),\000d\000a('补录', '20240602', '1124'),\000d\000a('补录', '20240602', '1403'),\000d\000a('补录', '20240602', '1457'),\000d\000a('补录', '20240602', '1548'),\000d\000a('补录', '20240602', '1813'),\000d\000a('补录', '20240602', '1930'),\000d\000a('补录', '20240602', '1959'),\000d\000a('补录', '20240602', '2143'),\000d\000a('补录', '20240603', '0809'),\000d\000a('补录', '20240603', '0820'),\000d\000a('补录', '20240603', '0826'),\000d\000a('补录', '20240603', '1109'),\000d\000a('补录', '20240603', '1216'),\000d\000a('补录', '20240603', '1241'),\000d\000a('补录', '20240603', '1320'),\000d\000a('补录', '20240603', '1447'),\000d\000a('补录', '20240603', '1556'),\000d\000a('补录', '20240603', '1737'),\000d\000a('补录', '20240603', '1821'),\000d\000a('补录', '20240603', '1841'),\000d\000a('补录', '20240603', '1922'),\000d\000a('补录', '20240603', '1943'),\000d\000a('补录', '20240603', '2043'),\000d\000a('补录', '20240604', '0810'),\000d\000a('补录', '20240604', '0921'),\000d\000a('补录', '20240604', '1024'),\000d\000a('补录', '20240604', '1245'),\000d\000a('补录', '20240604', '1247'),\000d\000a('补录', '20240604', '1353'),\000d\000a('补录', '20240604', '1421'),\000d\000a('补录', '20240604', '1501'),\000d\000a('补录', '20240604', '1512'),\000d\000a('补录', '20240604', '1535'),\000d\000a('补录', '20240604', '1851'),\000d\000a('补录', '20240604', '1858'),\000d\000a('补录', '20240604', '1909'),\000d\000a('补录', '20240604', '1920'),\000d\000a('补录', '20240604', '2043'),\000d\000a('补录', '20240605', '0836'),\000d\000a('补录', '20240605', '0931'),\000d\000a('补录', '20240605', '1123'),\000d\000a('补录', '20240605', '1135'),\000d\000a('补录', '20240605', '1212'),\000d\000a('补录', '20240605', '1355'),\000d\000a('补录', '20240605', '1511'),\000d\000a('补录', '20240605', '1558'),\000d\000a('补录', '20240605', '1644'),\000d\000a('补录', '20240605', '1801'),\000d\000a('补录', '20240605', '1923'),\000d\000a('补录', '20240605', '1950'),\000d\000a('补录', '20240605', '1955'),\000d\000a('补录', '20240605', '2031'),\000d\000a('补录', '20240606', '0831'),\000d\000a('补录', '20240606', '0942'),\000d\000a('补录', '20240606', '1032'),\000d\000a('补录', '20240606', '1131'),\000d\000a('补录', '20240606', '1349'),\000d\000a('补录', '20240606', '1422'),\000d\000a('补录', '20240606', '1441'),\000d\000a('补录', '20240606', '1548'),\000d\000a('补录', '20240606', '1646'),\000d\000a('补录', '20240606', '1706'),\000d\000a('补录', '20240606', '1747'),\000d\000a('补录', '20240606', '1753'),\000d\000a('补录', '20240606', '2120'),\000d\000a('补录', '20240606', '2135'),\000d\000a('补录', '20240607', '0828'),\000d\000a('补录', '20240607', '1021'),\000d\000a('补录', '20240607', '1055'),\000d\000a('补录', '20240607', '1223'),\000d\000a('补录', '20240607', '1231'),\000d\000a('补录', '20240607', '1255'),\000d\000a('补录', '20240607', '1256'),\000d\000a('补录', '20240607', '1344'),\000d\000a('补录', '20240607', '1356'),\000d\000a('补录', '20240607', '1412'),\000d\000a('补录', '20240607', '1421'),\000d\000a('补录', '20240607', '1548'),\000d\000a('补录', '20240607', '1823'),\000d\000a('补录', '20240607', '1938'),\000d\000a('补录', '20240607', '2057'),\000d\000a('补录', '20240607', '2137'),\000d\000a('补录', '20240608', '0816'),\000d\000a('补录', '20240608', '1019'),\000d\000a('补录', '20240608', '1107'),\000d\000a('补录', '20240608', '1130'),\000d\000a('补录', '20240608', '1205'),\000d\000a('补录', '20240608', '1748'),\000d\000a('补录', '20240608', '1757'),\000d\000a('补录', '20240608', '1813'),\000d\000a('补录', '20240608', '1840'),\000d\000a('补录', '20240608', '1843'),\000d\000a('补录', '20240608', '1848'),\000d\000a('补录', '20240608', '1938'),\000d\000a('补录', '20240608', '2059'),\000d\000a('补录', '20240608', '2114'),\000d\000a('补录', '20240608', '2137'),\000d\000a('补录', '20240609', '0908'),\000d\000a('补录', '20240609', '1009'),\000d\000a('补录', '20240609', '1213'),\000d\000a('补录', '20240609', '1313'),\000d\000a('补录', '20240609', '1432'),\000d\000a('补录', '20240609', '1556'),\000d\000a('补录', '20240609', '1623'),\000d\000a('补录', '20240609', '1720'),\000d\000a('补录', '20240609', '2046'),\000d\000a('补录', '20240609', '2143'),\000d\000a('补录', '20240610', '0906'),\000d\000a('补录', '20240610', '1113'),\000d\000a('补录', '20240610', '1119'),\000d\000a('补录', '20240610', '1225'),\000d\000a('补录', '20240610', '1308'),\000d\000a('补录', '20240610', '1338'),\000d\000a('补录', '20240610', '1511'),\000d\000a('补录', '20240610', '1516'),\000d\000a('补录', '20240610', '1548'),\000d\000a('补录', '20240610', '1819'),\000d\000a('补录', '20240610', '1851'),\000d\000a('补录', '20240610', '2001'),\000d\000a('补录', '20240610', '2041'),\000d\000a('补录', '20240610', '2122'),\000d\000a('补录', '20240610', '2144'),\000d\000a(127, [*],'20250611', '152530'),\000d\000a(128, ,'20250611', '152537'),\000d\000a(129, ,'20250611', '152545'),\000d\000a(130, ,'20250611', '155637'),\000d\000a(131, ,'20250612', '054137'),\000d\000a(132, ,'20250612', '074518'),\000d\000a(133, ,'20250612', '074955')"; expected "DEFAULT, INTERSECTS (, NOT, EXISTS, UNIQUE, INTERSECTS"; SQL statement:
+INSERT INTO smoke_timer (rev1, date, time) VALUES
+('补录', '20240602', '0822'),
+('补录', '20240602', '0823'),
+('补录', '20240602', '0902'),
+('补录', '20240602', '1043'),
+('补录', '20240602', '1124'),
+('补录', '20240602', '1403'),
+('补录', '20240602', '1457'),
+('补录', '20240602', '1548'),
+('补录', '20240602', '1813'),
+('补录', '20240602', '1930'),
+('补录', '20240602', '1959'),
+('补录', '20240602', '2143'),
+('补录', '20240603', '0809'),
+('补录', '20240603', '0820'),
+('补录', '20240603', '0826'),
+('补录', '20240603', '1109'),
+('补录', '20240603', '1216'),
+('补录', '20240603', '1241'),
+('补录', '20240603', '1320'),
+('补录', '20240603', '1447'),
+('补录', '20240603', '1556'),
+('补录', '20240603', '1737'),
+('补录', '20240603', '1821'),
+('补录', '20240603', '1841'),
+('补录', '20240603', '1922'),
+('补录', '20240603', '1943'),
+('补录', '20240603', '2043'),
+('补录', '20240604', '0810'),
+('补录', '20240604', '0921'),
+('补录', '20240604', '1024'),
+('补录', '20240604', '1245'),
+('补录', '20240604', '1247'),
+('补录', '20240604', '1353'),
+('补录', '20240604', '1421'),
+('补录', '20240604', '1501'),
+('补录', '20240604', '1512'),
+('补录', '20240604', '1535'),
+('补录', '20240604', '1851'),
+('补录', '20240604', '1858'),
+('补录', '20240604', '1909'),
+('补录', '20240604', '1920'),
+('补录', '20240604', '2043'),
+('补录', '20240605', '0836'),
+('补录', '20240605', '0931'),
+('补录', '20240605', '1123'),
+('补录', '20240605', '1135'),
+('补录', '20240605', '1212'),
+('补录', '20240605', '1355'),
+('补录', '20240605', '1511'),
+('补录', '20240605', '1558'),
+('补录', '20240605', '1644'),
+('补录', '20240605', '1801'),
+('补录', '20240605', '1923'),
+('补录', '20240605', '1950'),
+('补录', '20240605', '1955'),
+('补录', '20240605', '2031'),
+('补录', '20240606', '0831'),
+('补录', '20240606', '0942'),
+('补录', '20240606', '1032'),
+('补录', '20240606', '1131'),
+('补录', '20240606', '1349'),
+('补录', '20240606', '1422'),
+('补录', '20240606', '1441'),
+('补录', '20240606', '1548'),
+('补录', '20240606', '1646'),
+('补录', '20240606', '1706'),
+('补录', '20240606', '1747'),
+('补录', '20240606', '1753'),
+('补录', '20240606', '2120'),
+('补录', '20240606', '2135'),
+('补录', '20240607', '0828'),
+('补录', '20240607', '1021'),
+('补录', '20240607', '1055'),
+('补录', '20240607', '1223'),
+('补录', '20240607', '1231'),
+('补录', '20240607', '1255'),
+('补录', '20240607', '1256'),
+('补录', '20240607', '1344'),
+('补录', '20240607', '1356'),
+('补录', '20240607', '1412'),
+('补录', '20240607', '1421'),
+('补录', '20240607', '1548'),
+('补录', '20240607', '1823'),
+('补录', '20240607', '1938'),
+('补录', '20240607', '2057'),
+('补录', '20240607', '2137'),
+('补录', '20240608', '0816'),
+('补录', '20240608', '1019'),
+('补录', '20240608', '1107'),
+('补录', '20240608', '1130'),
+('补录', '20240608', '1205'),
+('补录', '20240608', '1748'),
+('补录', '20240608', '1757'),
+('补录', '20240608', '1813'),
+('补录', '20240608', '1840'),
+('补录', '20240608', '1843'),
+('补录', '20240608', '1848'),
+('补录', '20240608', '1938'),
+('补录', '20240608', '2059'),
+('补录', '20240608', '2114'),
+('补录', '20240608', '2137'),
+('补录', '20240609', '0908'),
+('补录', '20240609', '1009'),
+('补录', '20240609', '1213'),
+('补录', '20240609', '1313'),
+('补录', '20240609', '1432'),
+('补录', '20240609', '1556'),
+('补录', '20240609', '1623'),
+('补录', '20240609', '1720'),
+('补录', '20240609', '2046'),
+('补录', '20240609', '2143'),
+('补录', '20240610', '0906'),
+('补录', '20240610', '1113'),
+('补录', '20240610', '1119'),
+('补录', '20240610', '1225'),
+('补录', '20240610', '1308'),
+('补录', '20240610', '1338'),
+('补录', '20240610', '1511'),
+('补录', '20240610', '1516'),
+('补录', '20240610', '1548'),
+('补录', '20240610', '1819'),
+('补录', '20240610', '1851'),
+('补录', '20240610', '2001'),
+('补录', '20240610', '2041'),
+('补录', '20240610', '2122'),
+('补录', '20240610', '2144'),
+(127, ,'20250611', '152530'),
+(128, ,'20250611', '152537'),
+(129, ,'20250611', '152545'),
+(130, ,'20250611', '155637'),
+(131, ,'20250612', '054137'),
+(132, ,'20250612', '074518'),
+(133, ,'20250612', '074955') [42001-214]
+2025-06-12 17:28:46 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "SMOKE_TIMER" not found (this database is empty); SQL statement:
+INSERT INTO smoke_timer (rev1, date, time) VALUES
+('补录', '20250602', '0822'),
+('补录', '20250602', '0823'),
+('补录', '20250602', '0902'),
+('补录', '20250602', '1043'),
+('补录', '20250602', '1124'),
+('补录', '20250602', '1403'),
+('补录', '20250602', '1457'),
+('补录', '20250602', '1548'),
+('补录', '20250602', '1813'),
+('补录', '20250602', '1930'),
+('补录', '20250602', '1959'),
+('补录', '20250602', '2143'),
+('补录', '20250603', '0809'),
+('补录', '20250603', '0820'),
+('补录', '20250603', '0826'),
+('补录', '20250603', '1109'),
+('补录', '20250603', '1216'),
+('补录', '20250603', '1241'),
+('补录', '20250603', '1320'),
+('补录', '20250603', '1447'),
+('补录', '20250603', '1556'),
+('补录', '20250603', '1737'),
+('补录', '20250603', '1821'),
+('补录', '20250603', '1841'),
+('补录', '20250603', '1922'),
+('补录', '20250603', '1943'),
+('补录', '20250603', '2043'),
+('补录', '20250604', '0810'),
+('补录', '20250604', '0921'),
+('补录', '20250604', '1024'),
+('补录', '20250604', '1245'),
+('补录', '20250604', '1247'),
+('补录', '20250604', '1353'),
+('补录', '20250604', '1421'),
+('补录', '20250604', '1501'),
+('补录', '20250604', '1512'),
+('补录', '20250604', '1535'),
+('补录', '20250604', '1851'),
+('补录', '20250604', '1858'),
+('补录', '20250604', '1909'),
+('补录', '20250604', '1920'),
+('补录', '20250604', '2043'),
+('补录', '20250605', '0836'),
+('补录', '20250605', '0931'),
+('补录', '20250605', '1123'),
+('补录', '20250605', '1135'),
+('补录', '20250605', '1212'),
+('补录', '20250605', '1355'),
+('补录', '20250605', '1511'),
+('补录', '20250605', '1558'),
+('补录', '20250605', '1644'),
+('补录', '20250605', '1801'),
+('补录', '20250605', '1923'),
+('补录', '20250605', '1950'),
+('补录', '20250605', '1955'),
+('补录', '20250605', '2031'),
+('补录', '20250606', '0831'),
+('补录', '20250606', '0942'),
+('补录', '20250606', '1032'),
+('补录', '20250606', '1131'),
+('补录', '20250606', '1349'),
+('补录', '20250606', '1422'),
+('补录', '20250606', '1441'),
+('补录', '20250606', '1548'),
+('补录', '20250606', '1646'),
+('补录', '20250606', '1706'),
+('补录', '20250606', '1747'),
+('补录', '20250606', '1753'),
+('补录', '20250606', '2120'),
+('补录', '20250606', '2135'),
+('补录', '20250607', '0828'),
+('补录', '20250607', '1021'),
+('补录', '20250607', '1055'),
+('补录', '20250607', '1223'),
+('补录', '20250607', '1231'),
+('补录', '20250607', '1255'),
+('补录', '20250607', '1256'),
+('补录', '20250607', '1344'),
+('补录', '20250607', '1356'),
+('补录', '20250607', '1412'),
+('补录', '20250607', '1421'),
+('补录', '20250607', '1548'),
+('补录', '20250607', '1823'),
+('补录', '20250607', '1938'),
+('补录', '20250607', '2057'),
+('补录', '20250607', '2137'),
+('补录', '20250608', '0816'),
+('补录', '20250608', '1019'),
+('补录', '20250608', '1107'),
+('补录', '20250608', '1130'),
+('补录', '20250608', '1205'),
+('补录', '20250608', '1748'),
+('补录', '20250608', '1757'),
+('补录', '20250608', '1813'),
+('补录', '20250608', '1840'),
+('补录', '20250608', '1843'),
+('补录', '20250608', '1848'),
+('补录', '20250608', '1938'),
+('补录', '20250608', '2059'),
+('补录', '20250608', '2114'),
+('补录', '20250608', '2137'),
+('补录', '20250609', '0908'),
+('补录', '20250609', '1009'),
+('补录', '20250609', '1213'),
+('补录', '20250609', '1313'),
+('补录', '20250609', '1432'),
+('补录', '20250609', '1556'),
+('补录', '20250609', '1623'),
+('补录', '20250609', '1720'),
+('补录', '20250609', '2046'),
+('补录', '20250609', '2143'),
+('补录', '20250610', '0906'),
+('补录', '20250610', '1113'),
+('补录', '20250610', '1119'),
+('补录', '20250610', '1225'),
+('补录', '20250610', '1308'),
+('补录', '20250610', '1338'),
+('补录', '20250610', '1511'),
+('补录', '20250610', '1516'),
+('补录', '20250610', '1548'),
+('补录', '20250610', '1819'),
+('补录', '20250610', '1851'),
+('补录', '20250610', '2001'),
+('补录', '20250610', '2041'),
+('补录', '20250610', '2122'),
+('补录', '20250610', '2144'),
+( NULL,'20250611', '152530'),
+( NULL,'20250611', '152537'),
+( NULL,'20250611', '152545'),
+( NULL,'20250611', '155637'),
+( NULL,'20250612', '054137'),
+( NULL,'20250612', '074518') [42104-214]
