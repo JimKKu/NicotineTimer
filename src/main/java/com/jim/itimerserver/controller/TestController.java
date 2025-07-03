@@ -28,4 +28,10 @@ public class TestController {
         return "饿了咯H";
     }
 
+    @GetMapping("/hello")
+    public String hello() {
+        System.out.println("hello");
+        return "hello";
+    }
+
 }
