@@ -23,7 +23,7 @@ import java.util.Map;
 @RequestMapping("/smoke")
 public class SmokerController {
 
-    @Value("${timer.file_dir}")
+    @Value("${timer.smoke_file_dir}")
     private String picDir;
 
 

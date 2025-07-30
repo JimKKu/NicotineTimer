@@ -1,4 +1,10 @@
 spring:
+  mvc:
+    static-path-pattern: /**
+  web:
+    resources:
+      static-locations: classpath:/static/
+
   application:
     name: 'iTimer-Server'
   profiles:
@@ -10,12 +16,17 @@ spring:
       max-request-size: 10MB
 server:
   port: 8080
-  servlet:
-    context-path: /iTimer
+#  servlet:
+#    context-path: /iTimer
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: com.jim.itimerserver.entity
 
+
+
 timer:
-  file_dir: '/home/jim/Desktop/'
+  smoke_file_dir: '/Users/hsk/Desktop/'
+
+file:
+  hidden_pic_dir: '/Users/hsk/Desktop/hidden_from_phone/'

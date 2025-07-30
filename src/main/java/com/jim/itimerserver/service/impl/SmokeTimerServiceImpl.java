@@ -47,12 +47,7 @@ public class SmokeTimerServiceImpl implements SmokeTimerService {
 
     @Override
     public List<DailyCount> getChartData(String startDate, String endDate) {
-        List<DailyCount> dailyCounts = mapper.countDailyData(startDate, endDate);
-        System.out.println(dailyCounts.size());
-        dailyCounts.forEach(dailyCount -> {
-            System.out.println("---------" + dailyCount.getDate() + " | " + dailyCount.getCount());
-        });
-        return dailyCounts;
+        return mapper.countDailyData(startDate, endDate);
     }
 
 }

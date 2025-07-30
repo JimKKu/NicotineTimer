@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:h2:file:/home/jim/DevCodes/iTimer-Server/xxdb/h2db2;IFEXISTS=FALSE # Ubuntu
+    url: jdbc:h2:file:/Users/hsk/Desktop/h2db;IFEXISTS=FALSE # Ubuntu
 #    url: jdbc:h2:file:/Users/hsk/DevCodes/Gitlab/iTimer-Server/xxdb/h2db;IFEXISTS=FALSE
     driver-class-name: org.h2.Driver
     username: sa
