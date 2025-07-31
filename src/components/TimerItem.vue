@@ -38,6 +38,7 @@
   <el-form
       :class="['container-set',chart_flag ? 'container-set-top' : 'container-set-bottom']"
       label-width="auto"
+      v-if="show_set_form"
   >
 
     <el-row :gutter="20">
@@ -72,11 +73,11 @@
       </el-col>
       <el-col :offset="12" :span="4"><div class="grid-content ep-bg-purple" />
 <!--        <el-button @click="" type="default" plain :icon="Cancel">取消</el-button>-->
-        <button type="button"><Cancel/>取消</button>
+        <button type="button" v-show="!latest_date_is_null"><Cancel/>取消</button>
       </el-col>
       <el-col :span="4"><div class="grid-content ep-bg-purple"/>
 <!--        <el-button @click="" type="primary" :icon="Start">确定</el-button>-->
-        <button type="button"><Start/>确定</button>
+        <button type="button" @click="btn_submit"><Start/>确定</button>
       </el-col>
     </el-row>
   </el-form>
@@ -97,7 +98,7 @@ import Today from "@/components/icons/IconToday.vue";
 import Start from "@/components/icons/IconStart.vue";
 import Cancel from "@/components/icons/IconCancel.vue";
 import {onMounted, onUnmounted, ref,reactive, watch} from "vue";
-import {getData, getLatestDate} from "@/api/api.ts";
+import {getData, fetchLatestDate, setDate} from "@/api/api.ts";
 import {Setting} from '@element-plus/icons-vue'
 
 
@@ -117,7 +118,8 @@ const timePassed = ref<TimePassed>({
   mills: '000',
 })
 
-const target = (new Date('2025-06-02T15:00:00'))
+let target = new Date('2025-06-02T15:00:00')
+
 
 let timer: number
 
@@ -146,6 +148,7 @@ const updateTime = () => {
 }
 
 onMounted(() => {
+  getLatestDate()
   updateTime()
   timer = setInterval(updateTime, 50)
 })
@@ -203,20 +206,41 @@ watch(() => timePassed.value.seconds,() => {
 
 const latestDate = ref('')
 const show_set_form = ref(false)
+const latest_date_is_null = ref(false)
 const formLabelWidth = '140px'
-onMounted(async () => {
+
+const getLatestDate = async () => {
   try {
-    // 获取最新的日期信息
-    let rsp = await getLatestDate()
-    if(rsp.code === 200) {
+    // 获取最新的日期信息 - 这里调用的是API函数，不是自身
+    let response = await fetchLatestDate(); // 确保这是你的API调用函数
+
+    if(response.code === 200) {
       // 获取成功，从今天开始计时
-      return
+      const dateStr = response.data.datetime;
+
+      // 解析日期字符串
+      const year = parseInt(dateStr.substring(0, 4));
+      const month = parseInt(dateStr.substring(4, 6)) - 1; // 月份从0开始
+      const day = parseInt(dateStr.substring(6, 8));
+      const hours = parseInt(dateStr.substring(8, 10));
+      const minutes = parseInt(dateStr.substring(10, 12));
+      const seconds = parseInt(dateStr.substring(12, 14));
+
+      // 更新target
+      target = new Date(year, month, day, hours, minutes, seconds);
+      latest_date_is_null.value = false;
+      return target; // 返回新的Date对象
+    } else {
+      show_set_form.value = true;
+      latest_date_is_null.value = true;
+      return null; // 或者抛出错误
     }
-    show_set_form.value = true
   } catch (err) {
-    console.error(err)
+    console.error("获取最新日期失败:", err);
+    show_set_form.value = true;
+    throw err; // 可以选择重新抛出错误或返回null
   }
-})
+}
 
 // 自定义日期信息
 const set_form = reactive({
@@ -244,8 +268,20 @@ const btn_now = () => {
 }
 
 // 提交 | 按钮
-const btn_submit = () => {
+const loading = ref(false)
+const btn_submit = async () => {
+  loading.value = true
+  let rsp = await setDate(set_form.date, set_form.time);
 
+  if (rsp.code === 200) {
+    // 更新成功 获取最新时间日期 返回显示
+    getLatestDate()
+    show_set_form.value = false
+    return
+  }
+
+  // 更新失败
+  console.log('更新失败')
 }
 
 </script>
@@ -441,16 +477,22 @@ const btn_submit = () => {
     position: relative;
     text-align: right;
     border-radius: 4px;
-    border: none;
-    box-shadow: 2px 2px 6px #8e8e8e,-2px -2px 6px #fff;
     color: gray;
+    transition:  all .2s;
+    border: 1px solid gray;
 
     svg {
       width: 20px;
       height: 20px;
       position: absolute;
-      left: 6px;
+      left: 8px;
     }
+
+  }
+
+  button:hover {
+    box-shadow: 2px 2px 6px #8e8e8e,-2px -2px 6px #fff;
+    border: 1px solid transparent;
   }
 }
 
@@ -462,103 +504,3 @@ const btn_submit = () => {
 }
 
 </style>
-
-<!--  <div class="background">-->
-<!--    <i class="set-icon-day"><Setting/></i>-->
-<!--    <i class="set-icon-hour"><Setting/></i>-->
-<!--    <i class="set-icon-min"><Setting/></i>-->
-<!--    <i class="set-icon-second"><Setting/></i>-->
-<!--    <i class="set-icon-mill"><Setting/></i>-->
-<!--  </div>-->
-
-<!--.background {-->
-<!--position: absolute;-->
-<!--left: 0;-->
-<!--top: 0;-->
-<!--width: 100%;-->
-<!--height: 100%;-->
-
-<!--i {-->
-<!--display: inline-block;-->
-<!--position: absolute;-->
-<!--color: gray;-->
-<!--text-align: center;-->
-<!--svg {-->
-<!--width: 24px;-->
-<!--height: 24px;-->
-<!--opacity: 0.16;-->
-<!--}-->
-<!--}-->
-
-<!--.set-icon-day {-->
-<!--position: absolute;-->
-<!--left: -50%;-->
-<!--top: -50%;-->
-<!--animation: rotate-right 520s infinite linear;-->
-<!--svg {-->
-<!--width: 1600px;-->
-<!--height: 1600px;-->
-<!--}-->
-<!--}-->
-
-<!--.set-icon-hour {-->
-<!--left: 24%;-->
-<!--top: 30%;-->
-<!--animation: rotate-left 360s infinite linear;-->
-
-<!--svg {-->
-<!--width: 800px;-->
-<!--height: 800px;-->
-<!--}-->
-<!--}-->
-<!--.set-icon-min {-->
-<!--left: 55%;-->
-<!--top: 5%;-->
-<!--animation: rotate-right 30s infinite linear;-->
-
-<!--svg {-->
-<!--width: 500px;-->
-<!--height: 500px;-->
-<!--}-->
-<!--}-->
-
-<!--.set-icon-second {-->
-<!--left: 76%;-->
-<!--top: 43%;-->
-<!--animation: rotate-left 6s infinite linear;-->
-
-<!--svg {-->
-<!--width: 300px;-->
-<!--height: 300px;-->
-<!--}-->
-<!--}-->
-<!--.set-icon-mill {-->
-<!--position: absolute;-->
-<!--left: 89%;-->
-<!--top: 33%;-->
-<!--animation: rotate-right 3s infinite linear;-->
-
-<!--svg {-->
-<!--width: 200px;-->
-<!--height: 200px;-->
-<!--}-->
-<!--}-->
-<!--}-->
-
-<!--@keyframes rotate-right {-->
-<!--0% {-->
-<!--transform: rotate(0);-->
-<!--}-->
-<!--100% {-->
-<!--transform: rotate(360deg);-->
-<!--}-->
-<!--}-->
-
-<!--@keyframes rotate-left {-->
-<!--0% {-->
-<!--transform: rotate(0);-->
-<!--}-->
-<!--100% {-->
-<!--transform: rotate(-360deg);-->
-<!--}-->
-<!--}-->
