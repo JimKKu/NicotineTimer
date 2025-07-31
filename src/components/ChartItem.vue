@@ -8,6 +8,7 @@
 <script setup lang="ts">
 import * as echarts from 'echarts'
 import { onMounted, onBeforeUnmount, ref, watch } from 'vue'
+import {fetchLatestDate} from "@/api/api.ts";
 
 // 定义 props
 const { hidden } = defineProps<{
@@ -72,8 +73,17 @@ function getDateRange(start: string, end: string): string[] {
 }
 
 onMounted(async () => {
+
+  const rsp = await fetchLatestDate();
+  console.log(JSON.stringify(rsp));
+  let startDate = ''
+  if(rsp.code !== 200) {
+    startDate = getToday()
+  } else {
+    startDate = rsp.data.datetime.substring(0,8)
+  }
+
   const today = getToday()
-  const startDate = '20250602'
 
   const res = await fetch(`/smoke/chart/${startDate}/${today}`)
   const originalData: ChartData[] = await res.json()
