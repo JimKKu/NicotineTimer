@@ -17,11 +17,12 @@ import java.io.IOException;
 @RequestMapping("/file")
 public class FileController {
 
-    @Value("${file.hidden_pic_dir}")
-    private String hidden_pic_dir;
+    @Value("${timer.smoke_file_dir}")
+    private String picDir;
 
-    @PostMapping("/hidden_pic")
-    public String pic(@RequestParam MultipartFile file, @RequestHeader HttpHeaders headers) throws IOException {
+
+    @PostMapping("/pic")
+    public String pic(@RequestParam MultipartFile file,@RequestHeader HttpHeaders headers) throws IOException {
 
         // 验证请求头
         if (!HttpUtils.checkUPHeader(headers)) {
@@ -34,11 +35,10 @@ public class FileController {
         String type = HttpUtils.getHeaderValue(headers,"type");
         String originalFilename = file.getOriginalFilename();
         String suffix = FileUtils.getFileExtension(originalFilename);
-        String filePath = hidden_pic_dir + type + "/" + today + suffix;
+        String filePath = picDir + type + "/" + today + suffix;
 
         // 存储图片
         FileUtils.save(file, filePath);
-
         return "OK";
     }
 

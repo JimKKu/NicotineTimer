@@ -5,3 +5,10 @@ CREATE TABLE smoke_timer (
      date VARCHAR(8),   -- yyyyMMdd
      time VARCHAR(6)    -- HHmmss
 );
+
+
+CREATE TABLE IF NOT EXISTS DATE_INFO (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    date CHAR(14) COMMENT '日期，格式：YYYYMMDDHHmm',
+    create_time CHAR(14) COMMENT '创建时间，格式：YYYYMMDDHHMMSS'
+);

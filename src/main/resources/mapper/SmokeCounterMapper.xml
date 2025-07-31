@@ -3,9 +3,9 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.jim.itimerserver.mapper.SmokeTimerMapper">
+<mapper namespace="com.jim.itimerserver.mapper.CounterMapper">
 
-    <resultMap id="BaseResultMap" type="com.jim.itimerserver.entity.timer.SmokeTimer">
+    <resultMap id="BaseResultMap" type="com.jim.itimerserver.entity.count.SmokeCounter">
         <id property="id" column="id"/>
         <result property="rev1" column="rev1"/>
         <result property="rev2" column="rev2"/>
@@ -13,7 +13,7 @@
         <result property="time" column="time"/>
     </resultMap>
 
-    <insert id="insert" parameterType="com.jim.itimerserver.entity.timer.SmokeTimer" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insert" parameterType="com.jim.itimerserver.entity.count.SmokeCounter" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO smoke_timer (rev1, rev2, date, time)
         VALUES (#{rev1}, #{rev2}, #{date}, #{time})
     </insert>
@@ -27,7 +27,7 @@
         FROM smoke_timer
     </select>
 
-    <select id="countDailyData" resultType="com.jim.itimerserver.entity.model.DailyCount">
+    <select id="countDailyData" resultType="com.jim.itimerserver.entity.count.DailyCount">
         SELECT date, COUNT(*) AS count
         FROM smoke_timer
         WHERE date BETWEEN #{startDate} AND #{endDate}
