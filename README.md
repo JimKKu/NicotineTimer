@@ -2,7 +2,7 @@
 
 ##  开发环境
 
-OpenJDK 17 | MVN 399
+SpringBoot 3 | OpenJDK 17 | MVN 399 | VUE 3 | NODEJS 20.12.2 | ELEMENT PLUS
 
 
 ## 启动方式
