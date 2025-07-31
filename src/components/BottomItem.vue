@@ -5,7 +5,6 @@ const {num} = defineProps<{
 
 // 在这里使用num这个变量
 function getWord() {
-  console.log(num)
   return num%2 === 0 ? '吸烟有害健康！尽早戒烟有益健康！' : '烟雾迷人心智，让人意识不清。'
 }
 

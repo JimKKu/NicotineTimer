@@ -75,7 +75,7 @@ onMounted(async () => {
   const today = getToday()
   const startDate = '20250602'
 
-  const res = await fetch(`/api/iTimer/smoke/chart/${startDate}/${today}`)
+  const res = await fetch(`/smoke/chart/${startDate}/${today}`)
   const originalData: ChartData[] = await res.json()
 
   const dateMap = new Map<string, number>()

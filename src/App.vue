@@ -2,7 +2,7 @@
   <!-- 功能按钮组 -->
   <div class="button-group">
     <button @click="show_chart"><el-icon><TrendCharts /></el-icon></button>
-    <button @click="show_pic"><el-icon><Camera /></el-icon></button>
+<!--    <button @click="show_pic"><el-icon><Camera /></el-icon></button>-->
     <button @click="switch_timer"><el-icon><Switch /></el-icon></button>
 <!--    <button @click="switch_timer"><el-icon><IconTarget /></el-icon></button>-->
     <button @click="handleFullScreen"><el-icon><FullScreen /></el-icon></button>
@@ -16,7 +16,7 @@
   <!-- 计时器 -->
   <TimerItem :mode="time_mode" :chart_flag="chart_flag" :pic_flag="pic_flag"/>
   <!-- 目标 -->
-  <TargetsItem  :chart_flag="chart_flag" :pic_flag="pic_flag"/>
+<!--  <TargetsItem  :chart_flag="chart_flag" :pic_flag="pic_flag"/>-->
   <!-- 柱状图 -->
   <ChartItem :hidden="chart_flag" style="z-index: 100"/>
   <!-- 底部文字 -->
@@ -50,7 +50,7 @@ onMounted(() => {
 })
 
 // 柱状图相关
-const chart_flag = ref(true)
+const chart_flag = ref(false)
 
 function show_chart() {
   chart_flag.value = ! chart_flag.value

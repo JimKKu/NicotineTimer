@@ -1,5 +1,5 @@
 <template>
-  <div v-show="mode === 'small'" :class="['container-small',chart_flag ? 'container-small-top' : 'container-small-bottom',pic_flag ? 'container-small-left' : 'container-small-right']">
+  <div v-show="mode === 'small' && !show_set_form" :class="['container-small',chart_flag ? 'container-small-top' : 'container-small-bottom',pic_flag ? 'container-small-left' : 'container-small-right']">
     <WelcomeItem>
       <template #icon>
         <NoSmoke />
@@ -16,7 +16,7 @@
   </div>
 
   <!-- 让数字一跳一跳的 -->
-  <div v-show="mode === 'big'" :class="['container-big',chart_flag ? 'container-big-top' : 'container-big-bottom', pic_flag ? 'container-big-left' : 'container-big-right']">
+  <div v-show="mode === 'big' && !show_set_form" :class="['container-big',chart_flag ? 'container-big-top' : 'container-big-bottom', pic_flag ? 'container-big-left' : 'container-big-right']">
     <div class="big-timer big-mill">次<br/>{{ result }}</div>
     <div class="big-unit">天</div>
     <div class="big-timer big-day">{{ timePassed.days }}</div>
@@ -33,6 +33,53 @@
     </div>
     <span class="word-big">已经克服了<span>{{result}}</span>次吸烟的欲望，再多坚持一下吧！</span>
   </div>
+
+  <!-- 设置起始日期 -->
+  <el-form
+      :class="['container-set',chart_flag ? 'container-set-top' : 'container-set-bottom']"
+      label-width="auto"
+  >
+
+    <el-row :gutter="20">
+      <!-- 日期 -->
+      <el-col :span="12"><div class="grid-content ep-bg-purple" />
+        <el-form-item label="起始日期">
+          <el-date-picker
+              v-model="set_form.date"
+              clearable
+              type="date"
+              placeholder="选择开始日期"
+              value-format="YYYYMMDD"
+          />
+        </el-form-item>
+      </el-col>
+      <!-- 时间 -->
+      <el-col :span="12"><div class="grid-content ep-bg-purple" />
+        <el-form-item label="起始时间">
+          <el-time-picker
+              v-model="set_form.time"
+              placeholder="请选择起始时间"
+              value-format="HHmmss"
+          />
+        </el-form-item>
+      </el-col>
+    </el-row>
+    <!-- 按钮 -->
+    <el-row :gutter="20">
+      <el-col :span="4"><div class="grid-content ep-bg-purple" />
+<!--        <el-button @click="" type="primary" plain :icon="Today">此刻</el-button>-->
+        <button type="button" @click="btn_now"><Today/>此刻</button>
+      </el-col>
+      <el-col :offset="12" :span="4"><div class="grid-content ep-bg-purple" />
+<!--        <el-button @click="" type="default" plain :icon="Cancel">取消</el-button>-->
+        <button type="button"><Cancel/>取消</button>
+      </el-col>
+      <el-col :span="4"><div class="grid-content ep-bg-purple"/>
+<!--        <el-button @click="" type="primary" :icon="Start">确定</el-button>-->
+        <button type="button"><Start/>确定</button>
+      </el-col>
+    </el-row>
+  </el-form>
 </template>
 
 
@@ -46,8 +93,11 @@ const {chart_flag,pic_flag,mode} = defineProps<{
 
 import WelcomeItem from "@/components/WelcomeItem.vue";
 import NoSmoke from "@/components/icons/IconNoSmoke.vue";
-import {onMounted, onUnmounted, ref, watch} from "vue";
-import {getData} from "@/api/api.ts";
+import Today from "@/components/icons/IconToday.vue";
+import Start from "@/components/icons/IconStart.vue";
+import Cancel from "@/components/icons/IconCancel.vue";
+import {onMounted, onUnmounted, ref,reactive, watch} from "vue";
+import {getData, getLatestDate} from "@/api/api.ts";
 import {Setting} from '@element-plus/icons-vue'
 
 
@@ -67,7 +117,7 @@ const timePassed = ref<TimePassed>({
   mills: '000',
 })
 
-const target = new Date('2025-06-02T15:00:00')
+const target = (new Date('2025-06-02T15:00:00'))
 
 let timer: number
 
@@ -116,7 +166,7 @@ onMounted(async () => {
 })
 
 setInterval(async () => {
-  const res = await fetch('/api/iTimer/smoke/count')
+  const res = await getData()
   result.value = await res.json()
 }, 5000)
 
@@ -132,11 +182,10 @@ const oldTimePassed = ref<TimePassed>({
 // 初始化第一秒
 onMounted(() => {
 // 判断当前秒数
-  console.log(timePassed.value.seconds)
   if(timePassed.value.seconds === '00') {
     oldTimePassed.value.seconds = '59'
   } else {
-    oldTimePassed.value.seconds = timePassed.value.seconds - 1
+    oldTimePassed.value.seconds = String(Number(timePassed.value.seconds) - 1);
   }
 })
 
@@ -151,6 +200,53 @@ watch(() => timePassed.value.seconds,() => {
   },600)
 
 })
+
+const latestDate = ref('')
+const show_set_form = ref(false)
+const formLabelWidth = '140px'
+onMounted(async () => {
+  try {
+    // 获取最新的日期信息
+    let rsp = await getLatestDate()
+    if(rsp.code === 200) {
+      // 获取成功，从今天开始计时
+      return
+    }
+    show_set_form.value = true
+  } catch (err) {
+    console.error(err)
+  }
+})
+
+// 自定义日期信息
+const set_form = reactive({
+  date: '',
+  time: ''
+})
+
+
+// 日期与时间 | 按钮
+const btn_now = () => {
+  const now = new Date();
+
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, '0'); // 月份从0开始，所以要+1
+  const day = String(now.getDate()).padStart(2, '0');
+  const date = `${year}${month}${day}`; // 格式：yyyyMMdd
+
+  const hours = String(now.getHours()).padStart(2, '0');
+  const minutes = String(now.getMinutes()).padStart(2, '0');
+  const seconds = String(now.getSeconds()).padStart(2, '0');
+  const time = `${hours}${minutes}${seconds}`; // 格式：HHmm
+
+  set_form.date = date;
+  set_form.time = time;
+}
+
+// 提交 | 按钮
+const btn_submit = () => {
+
+}
 
 </script>
 
@@ -327,6 +423,44 @@ watch(() => timePassed.value.seconds,() => {
 .container-big-bottom {
   top: 50%;
 }
+
+.container-set {
+  width: 620px;
+  height: 130px;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  transition: all 0.2s;
+  border-radius: 6px;
+  padding: 26px;
+  box-shadow: 2px 2px 6px #8e8e8e,-2px -2px 6px #fff;
+
+  button {
+    width: 80px;
+    height: 28px;
+    position: relative;
+    text-align: right;
+    border-radius: 4px;
+    border: none;
+    box-shadow: 2px 2px 6px #8e8e8e,-2px -2px 6px #fff;
+    color: gray;
+
+    svg {
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      left: 6px;
+    }
+  }
+}
+
+.container-set-top {
+  top: 40%;
+}
+.container-set-bottom {
+  top: 50%;
+}
+
 </style>
 
 <!--  <div class="background">-->
