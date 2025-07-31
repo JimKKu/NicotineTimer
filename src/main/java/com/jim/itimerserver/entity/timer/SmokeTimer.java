@@ -1,16 +1,12 @@
 package com.jim.itimerserver.entity.timer;
 
-import lombok.*;
+import lombok.Builder;
+import lombok.Data;
 
 @Data
 @Builder
-@ToString
-@NoArgsConstructor
-@AllArgsConstructor
 public class SmokeTimer {
-    private Long id;
-    private String rev1;
-    private String rev2;
-    private String date;  // yyyyMMdd
-    private String time;  // HHmmss
+    private Integer id;             // 主键ID
+    private String datetime;       // 日期时间(YYYYMMDDHHmm)
+    private String createTime;     // 创建时间(YYYYMMDDHHMMSS)
 }

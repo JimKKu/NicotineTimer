@@ -1,11 +1,10 @@
 package com.jim.itimerserver.service;
 
-import com.jim.itimerserver.entity.model.DailyCount;
+import com.jim.itimerserver.entity.count.DailyCount;
 
 import java.util.List;
-import java.util.Map;
 
-public interface SmokeTimerService {
+public interface CounterService {
 
     /** 标记一次 */
     String mark();
@@ -15,4 +14,5 @@ public interface SmokeTimerService {
 
     /** 获取柱状图信息 | 横坐标与竖坐标 */
     List<DailyCount> getChartData(String startDate, String endDate);
+
 }

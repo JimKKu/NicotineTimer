@@ -1,4 +1,4 @@
-package com.jim.itimerserver.entity.model;
+package com.jim.itimerserver.entity.count;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

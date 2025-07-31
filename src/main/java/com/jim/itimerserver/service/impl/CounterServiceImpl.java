@@ -1,24 +1,20 @@
 package com.jim.itimerserver.service.impl;
 
-import com.jim.itimerserver.entity.model.DailyCount;
-import com.jim.itimerserver.entity.timer.SmokeTimer;
-import com.jim.itimerserver.mapper.SmokeTimerMapper;
-import com.jim.itimerserver.service.SmokeTimerService;
+import com.jim.itimerserver.entity.count.DailyCount;
+import com.jim.itimerserver.entity.count.SmokeCounter;
+import com.jim.itimerserver.mapper.CounterMapper;
+import com.jim.itimerserver.service.CounterService;
 import com.jim.itimerserver.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
-import java.util.Map;
-
-import static org.apache.logging.log4j.message.MapMessage.MapFormat.JSON;
 
 @Service
-public class SmokeTimerServiceImpl implements SmokeTimerService {
+public class CounterServiceImpl implements CounterService {
 
     @Autowired
-    private SmokeTimerMapper mapper;
+    private CounterMapper mapper;
 
     @Override
     public String mark() {
@@ -28,13 +24,13 @@ public class SmokeTimerServiceImpl implements SmokeTimerService {
         String date = datetime.substring(0,8);
 
         // 对象赋值
-        SmokeTimer smokeTimer = SmokeTimer.builder()
+        SmokeCounter smokeCounter = SmokeCounter.builder()
                 .date(date)
                 .time(time)
                 .build();
 
         // 入表
-        int res = mapper.insert(smokeTimer);
+        int res = mapper.insert(smokeCounter);
         if(res != 1) {
             throw new RuntimeException("新增失败");
         }
@@ -49,5 +45,8 @@ public class SmokeTimerServiceImpl implements SmokeTimerService {
     public List<DailyCount> getChartData(String startDate, String endDate) {
         return mapper.countDailyData(startDate, endDate);
     }
+
+
+
 
 }
