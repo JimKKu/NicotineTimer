@@ -1,28 +1,44 @@
 <template>
   <!-- 功能按钮组 -->
   <div class="button-group">
-    <button @click="show_chart"><el-icon><TrendCharts /></el-icon></button>
-<!--    <button @click="show_pic"><el-icon><Camera /></el-icon></button>-->
-    <button @click="switch_timer"><el-icon><Switch /></el-icon></button>
-<!--    <button @click="switch_timer"><el-icon><IconTarget /></el-icon></button>-->
-    <button @click="handleFullScreen"><el-icon><FullScreen /></el-icon></button>
-<!--    <button @click="switch_settings"-->
-<!--            :v-show="time_mode !== 'big'"-->
-<!--            :class="[time_mode !== 'big' ? 'setting-button-show' : 'setting-button-hidden']"-->
-<!--    >-->
-<!--      <el-icon class="setting-button-icon"><Setting /></el-icon>-->
-<!--    </button>-->
+
+<!-- 原button（左侧） -->
+<!--    <button @click="show_chart"><el-icon><TrendCharts /></el-icon></button>-->
+<!--    &lt;!&ndash;    <button @click="show_pic"><el-icon><Camera /></el-icon></button>&ndash;&gt;-->
+<!--    <button @click="switch_timer"><el-icon><Switch /></el-icon></button>-->
+<!--    &lt;!&ndash;    <button @click="switch_timer"><el-icon><IconTarget /></el-icon></button>&ndash;&gt;-->
+<!--    <button @click="handleFullScreen"><el-icon><FullScreen /></el-icon></button>-->
+
+    <el-row>
+      <!-- Left -->
+      <el-col :span="1">
+        <button @click="show_chart"><el-icon><TrendCharts /></el-icon></button>
+      </el-col>
+      <el-col :span="1">
+        <button @click="switch_timer"><el-icon><Switch /></el-icon></button>
+      </el-col>
+      <el-col :span="1">
+        <button @click="handleFullScreen"><el-icon><FullScreen /></el-icon></button>
+      </el-col>
+
+      <!-- Right -->
+      <el-col :span="1" :offset="20">
+        <button @click="handleLogin"><el-icon><IconLogin /></el-icon></button>
+      </el-col>
+    </el-row>
   </div>
-  <!-- 计时器 -->
-  <TimerItem :mode="time_mode" :chart_flag="chart_flag" :pic_flag="pic_flag"/>
-  <!-- 目标 -->
-<!--  <TargetsItem  :chart_flag="chart_flag" :pic_flag="pic_flag"/>-->
-  <!-- 柱状图 -->
-  <ChartItem :hidden="chart_flag" style="z-index: 100"/>
-  <!-- 底部文字 -->
-  <BottomItem :num="123" style="z-index: 100"/>
-  <!-- 右边的图片 -->
-  <PictureItem :hidden="pic_flag" :chart_flag="chart_flag" style="z-index: 10"/>
+  <div style="width: 100%;">
+    <!-- 计时器 -->
+    <TimerItem :mode="time_mode" :chart_flag="chart_flag" :pic_flag="pic_flag"/>
+    <!-- 目标 -->
+    <!--  <TargetsItem  :chart_flag="chart_flag" :pic_flag="pic_flag"/>-->
+    <!-- 柱状图 -->
+    <ChartItem :hidden="chart_flag" style="z-index: 100"/>
+    <!-- 底部文字 -->
+    <BottomItem :num="123" style="z-index: 100"/>
+    <!-- 右边的图片 -->
+    <PictureItem :hidden="pic_flag" :chart_flag="chart_flag" style="z-index: 10"/>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -36,7 +52,9 @@ import { useFullscreen } from './utils/ScreenUtils.ts'
 
 // ICON
 import { TrendCharts,Camera,Switch,Setting,FullScreen } from '@element-plus/icons-vue'
+import IconLogin from './components/icons/IconLogin.vue'
 import IconTarget from './components/icons/IconTarget.vue'
+import LoginItem from "@/components/LoginItem.vue";
 
 
 const { isFullscreen, toggleFullscreen } = useFullscreen()
@@ -77,6 +95,11 @@ function switch_settings() {
   setting_flag.value = !setting_flag.value
 }
 
+const login_flag = ref(false)
+function handleLogin() {
+  setting_flag.value = !setting_flag.value
+}
+
 // 目标相关
 </script>
 
@@ -84,7 +107,8 @@ function switch_settings() {
 .button-group {
   display: flex inline-block;
   flex-direction: row;
-  width: 40%;
+  width: 100%;
+  /* box-shadow: 4px 0px 8px gray; */
 
   button {
     background: none;
