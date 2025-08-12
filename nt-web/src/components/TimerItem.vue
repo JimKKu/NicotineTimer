@@ -38,7 +38,7 @@
   <el-form
       :class="['container-set',chart_flag ? 'container-set-top' : 'container-set-bottom']"
       label-width="auto"
-      v-if="show_set_form"
+      v-if="!show_set_form"
   >
 
     <el-row :gutter="20">
@@ -81,10 +81,43 @@
       </el-col>
     </el-row>
   </el-form>
+
+
+  <!-- 初始化用户名/密码 -->
+  <el-form
+      :class="['container-init-auth-info',chart_flag ? 'container-init-auth-info-top' : 'container-init-auth-info-bottom']"
+      label-width="60"
+      label-position="left"
+  >
+    <el-form-item
+      label="用户名"
+      style="margin-top: 20px"
+      >
+      <el-input placeholder="请输入用户名"></el-input>
+    </el-form-item>
+    <el-form-item
+        label="密&emsp;码"
+    >
+      <el-input placeholder="请输入密码"></el-input>
+    </el-form-item>
+    <el-form-item>
+      <el-row style="width: 100%">
+        <el-col :span="19">
+          <el-button type="primary" style="width: 100%"><el-icon><IconSubmit/></el-icon>&nbsp;提&emsp;交</el-button>
+        </el-col>
+        <el-col :span="1" :offset="1">
+          <el-button><el-icon><IconCancel/></el-icon></el-button>
+        </el-col>
+      </el-row>
+    </el-form-item>
+  </el-form>
 </template>
 
 
 <script setup lang="ts">
+import IconSubmit from './icons/IconSubmit.vue'
+import IconCancel from './icons/IconCancel.vue'
+
 const {chart_flag,pic_flag,mode} = defineProps<{
   chart_flag: boolean,
   pic_flag: boolean,
@@ -503,4 +536,22 @@ const btn_submit = async () => {
   top: 50%;
 }
 
+.container-init-auth-info {
+  width: 420px;
+  height: 240px;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  transition: all 0.2s;
+  border-radius: 6px;
+  padding: 26px;
+  box-shadow: 2px 2px 6px #8e8e8e,-2px -2px 6px #fff;
+}
+
+.container-init-auth-info-top {
+  top: 40%;
+}
+.container-init-auth-info-bottom {
+  top: 50%;
+}
 </style>
