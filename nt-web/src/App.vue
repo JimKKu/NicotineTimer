@@ -29,7 +29,8 @@
   </div>
   <div style="width: 100%;">
     <!-- 计时器 -->
-    <TimerItem :mode="time_mode" :chart_flag="chart_flag" :pic_flag="pic_flag"/>
+<!--    <TimerItem :mode="time_mode" :chart_flag="chart_flag" :pic_flag="pic_flag"/>-->
+    <InitItem :mode="init_flag" :chart_flag="chart_flag" :pic_flag="pic_flag"/>
     <!-- 目标 -->
     <!--  <TargetsItem  :chart_flag="chart_flag" :pic_flag="pic_flag"/>-->
     <!-- 柱状图 -->
@@ -55,6 +56,7 @@ import { TrendCharts,Camera,Switch,Setting,FullScreen } from '@element-plus/icon
 import IconLogin from './components/icons/IconLogin.vue'
 import IconTarget from './components/icons/IconTarget.vue'
 import LoginItem from "@/components/LoginItem.vue";
+import InitItem from "@/components/InitItem.vue";
 
 
 const { isFullscreen, toggleFullscreen } = useFullscreen()
@@ -99,6 +101,20 @@ const login_flag = ref(false)
 function handleLogin() {
   setting_flag.value = !setting_flag.value
 }
+
+// 在此处获取用户名信息、日期信息，并判断是否初始化
+/**
+ * no - 正常显示页面 Timer 等
+ * auth - 初始化用户名密码
+ * time - 初始化时间
+ * both - 初始化两者
+ * repwd - 重置用户名密码（需要填写旧的用户名密码）
+ */
+const init_flag = ref('no')
+onMounted(() => {
+  console.log('尽早戒烟有益身体健康！！！')
+})
+
 
 // 目标相关
 </script>
