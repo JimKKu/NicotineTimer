@@ -26,4 +26,7 @@ public interface TimerMapper {
     @Select("SELECT * FROM DATE_INFO ORDER BY id DESC LIMIT 1")
     SmokeTimer getLatest();
 
+    @Select("SELECT COUNT(1) FROM DATE_INFO")
+    int countAll();
+
 }

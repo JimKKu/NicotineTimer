@@ -13,7 +13,9 @@ public enum RspCode {
     UNAUTHORIZED(401, "未授权"),
     FORBIDDEN(403, "禁止访问"),
     NOT_FOUND(404, "资源不存在"),
-    INTERNAL_SERVER_ERROR(500, "服务器内部错误");
+    INTERNAL_SERVER_ERROR(500, "服务器内部错误"),
+    USER_NOT_NULL(900,"创建失败，用户已存在"),
+    USER_ERR_CODE(901,"验证码错误");
 
     private final int code;
     private final String msg;
